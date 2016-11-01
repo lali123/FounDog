@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    android:fitsSystemWindows="true"
+    android:id="@+id/FindogDetailFragment">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/Camera"
+            android:clickable="true"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/imageViewDogPicture" />
+        <fragment
+            android:name="FindogMobile.Fragments.GpsFragment"
+            android:id="@+id/gpsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:inputType="textMultiLine"
+            android:hint="@string/Breed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etBreed" />
+        <EditText
+            android:inputType="textMultiLine"
+            android:hint="@string/Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etDescription" />
+        <fragment
+            android:name="FindogMobile.Fragments.SaveFragment"
+            android:id="@+id/saveDogFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="Hello">Hello World, Click Me!</string>
+  <string name="ApplicationName">Findog</string>
+  <string name="GoogleKey">AIzaSyAQWj6EmtZiD1ruRqGwcvkR2AKxKSsuB1s</string>
+  <string name="Exit">Exit</string>
+  <string name="WantedDogs">Wanted dogs</string>
+  <string name="FoundDogs">Found dogs</string>
+  <string name="FindDog">Find a dog</string>
+  <string name="TakePicture">Take a picture</string>
+  <string name="Gps">GPS</string>
+  <string name="PointOnMap">Point on map</string>
+  <string name="Description">Description</string>
+  <string name="Save">Save</string>
+  <string name="Breed">Breed</string>
+
+</resources>

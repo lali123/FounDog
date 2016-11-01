@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindogMobile", "FindogMobile\FindogMobile.csproj", "{08438DCD-3F74-4FC8-8AF5-CEA5D5BCB564}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindogWeb", "FindogWeb\FindogWeb.csproj", "{FC05B05C-D109-49B7-B8A2-A3A6C9BA063B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindogTest", "FindogTest\FindogTest.csproj", "{CF20D1F3-FBAB-4E0B-8992-33E266554A09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{5FD86808-0DF8-4DAE-8627-7A4527BFF2D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08438DCD-3F74-4FC8-8AF5-CEA5D5BCB564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08438DCD-3F74-4FC8-8AF5-CEA5D5BCB564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08438DCD-3F74-4FC8-8AF5-CEA5D5BCB564}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{08438DCD-3F74-4FC8-8AF5-CEA5D5BCB564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08438DCD-3F74-4FC8-8AF5-CEA5D5BCB564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08438DCD-3F74-4FC8-8AF5-CEA5D5BCB564}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FC05B05C-D109-49B7-B8A2-A3A6C9BA063B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC05B05C-D109-49B7-B8A2-A3A6C9BA063B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC05B05C-D109-49B7-B8A2-A3A6C9BA063B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC05B05C-D109-49B7-B8A2-A3A6C9BA063B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF20D1F3-FBAB-4E0B-8992-33E266554A09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF20D1F3-FBAB-4E0B-8992-33E266554A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF20D1F3-FBAB-4E0B-8992-33E266554A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF20D1F3-FBAB-4E0B-8992-33E266554A09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FD86808-0DF8-4DAE-8627-7A4527BFF2D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FD86808-0DF8-4DAE-8627-7A4527BFF2D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FD86808-0DF8-4DAE-8627-7A4527BFF2D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FD86808-0DF8-4DAE-8627-7A4527BFF2D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
