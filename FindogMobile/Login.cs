@@ -37,6 +37,13 @@ namespace FindogMobile
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Login);
             // Create your application here
+            btnLogin = FindViewById<Button>(Resource.Id.btn_login);
+            btnRegister = FindViewById<Button>(Resource.Id.btn_register);
+            
+            txtName = FindViewById<EditText>(Resource.Id.input_name);
+            txtPassword = FindViewById<EditText>(Resource.Id.input_password);
+            txtEmail = FindViewById<EditText>(Resource.Id.input_email);
+            txtPhoneNumber = FindViewById<EditText>(Resource.Id.input_phone);
 
             if (UserAlreadyRegistered())
             {
@@ -45,12 +52,7 @@ namespace FindogMobile
             }
             else
             {
-                txtName = FindViewById<EditText>(Resource.Id.input_name);
-                txtPassword = FindViewById<EditText>(Resource.Id.input_password);
-                txtEmail = FindViewById<EditText>(Resource.Id.input_email);
-                txtPhoneNumber = FindViewById<EditText>(Resource.Id.input_phone);
-                btnRegister = FindViewById<Button>(Resource.Id.btn_register);
-                btnLogin = FindViewById<Button>(Resource.Id.btn_login);
+                
 
                 txtName.TextChanged += EditTextChanged;
                 txtPassword.TextChanged += EditTextChanged;
@@ -90,6 +92,7 @@ namespace FindogMobile
                     EmailAddress = prefs.GetString("Email", ""),
                     Name = prefs.GetString("Name", ""),
                     PhoneNumber = prefs.GetString("Phone", ""),
+                    Id = new Guid(prefs.GetString("Id", ""))
                 };
                 MobileUser.Instance().User = user;
 
@@ -101,6 +104,12 @@ namespace FindogMobile
                         return true;
                     }
                 }
+
+                txtName.Text = prefs.GetString("Name", "");
+                txtEmail.Text = prefs.GetString("Email", "");
+                txtPassword.Text = prefs.GetString("Password", "");
+                txtPhoneNumber.Text = prefs.GetString("Phone", "");
+
             }
             catch (Exception)
             {
@@ -149,6 +158,7 @@ namespace FindogMobile
                         Name = u["name"].ToString(),
                         PhoneNumber = u["phoneNumber"].ToString(),
                     };
+
                     users.Add(user);
                 }
             }
@@ -167,19 +177,21 @@ namespace FindogMobile
 
             if (!string.IsNullOrEmpty(txtName.Text) && !string.IsNullOrEmpty(txtEmail.Text) && !string.IsNullOrEmpty(txtPassword.Text) && !string.IsNullOrEmpty(txtPhoneNumber.Text))
             {
-                string email = txtEmail.Text;
-                editor.PutString("Name", txtName.Text);
-                editor.PutString("Email", email);
-                editor.PutString("Password", txtPassword.Text);
-                editor.PutString("Phone", txtPhoneNumber.Text);
-
                 User user = new User()
                 {
+                    Id = Guid.NewGuid(),
                     Date = DateTime.Now,
                     EmailAddress = txtEmail.Text,
                     Name = txtName.Text,
-                    PhoneNumber = txtEmail.Text,
+                    PhoneNumber = txtPhoneNumber.Text,
                 };
+
+
+                editor.PutString("Id", user.Id.ToString());
+                editor.PutString("Name", txtName.Text);
+                editor.PutString("Email", txtEmail.Text);
+                editor.PutString("Password", txtPassword.Text);
+                editor.PutString("Phone", txtPhoneNumber.Text);                
 
                 editor.Apply();
 
@@ -223,9 +235,15 @@ namespace FindogMobile
 
         private void LoginClick(object sender, EventArgs e)
         {
-            Toast.MakeText(this, "Login", ToastLength.Short).Show();
-            Intent intentMain = new Intent(this, typeof(MainActivity));
-            StartActivity(intentMain);
+            if (!string.IsNullOrEmpty(txtName.Text) 
+                && !string.IsNullOrEmpty(txtEmail.Text)
+                && !string.IsNullOrEmpty(txtPhoneNumber.Text) 
+                && !string.IsNullOrEmpty(txtPassword.Text))
+            {
+                Toast.MakeText(this, "Login", ToastLength.Short).Show();
+                Intent intentMain = new Intent(this, typeof(MainActivity));
+                StartActivity(intentMain);
+            }
         }
 
 

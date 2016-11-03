@@ -53,4 +53,9 @@
                 android:id="@+id/tvDogDescription" />
         </TableRow>
     </TableLayout>
+  <!--fragment xmlns:android="http://schemas.android.com/apk/res/android"
+      android:id="@+id/mapDescriptions"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      class="com.google.android.gms.maps.SupportMapFragment" /-->
 </LinearLayout>

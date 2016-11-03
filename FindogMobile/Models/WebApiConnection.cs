@@ -26,9 +26,9 @@ namespace FindogMobile.Models
         //from outside of the class  
         private WebApiConnection()
         {
-            //ConnectionString = @"http://192.168.1.102:8086/";
+            ConnectionString = @"http://192.168.1.101:8086/";
             //ConnectionString = @"http://192.168.1.64:8086/";
-            ConnectionString = @"http://192.168.1.7:8086/";
+            //ConnectionString = @"http://192.168.1.7:8086/";
         }
 
         //Static method which allows the instance creation  

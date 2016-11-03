@@ -16,7 +16,7 @@ namespace FindogMobile
     {
         private TabLayout tabLayout;
         private ViewPager findogViewPager;
-        private Toolbar toolbar;
+        //private Toolbar toolbar;
 
         public string Breed { get; set; }
         public string Description { get; set; }
@@ -27,6 +27,7 @@ namespace FindogMobile
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.FindDog);
+
             var adapter = new FindogTabsAdapter(this, SupportFragmentManager);
             findogViewPager = FindViewById<ViewPager>(Resource.Id.pager);
             findogViewPager.Adapter = adapter;
@@ -38,18 +39,18 @@ namespace FindogMobile
                 {
                     foreach (var f in SupportFragmentManager.Fragments)
                     {
-                        //if (f is FindogDetailsFragment)
-                        //{
-                        //    //(f as FindogDetailsFragment).RefreshImage();
-                        //    break;
-                        //}
+                        if (f is FindogDetailsFragment)
+                        {
+                            (f as FindogDetailsFragment).RefreshImage();
+                            break;
+                        }
                     }
                 }
             };
-            toolbar = FindViewById<Toolbar>(Resource.Id.my_toolbar);
+            //toolbar = FindViewById<Toolbar>(Resource.Id.my_toolbar);
             tabLayout = FindViewById<TabLayout>(Resource.Id.sliding_tabs);
 
-            SetSupportActionBar(toolbar);
+            //SetSupportActionBar(toolbar);
 
             // Setup tablayout with view pager
             tabLayout.SetupWithViewPager(findogViewPager);

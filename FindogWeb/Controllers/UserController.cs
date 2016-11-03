@@ -33,7 +33,7 @@ namespace FindogWeb.Controllers
 
 
         [Route("registeruser")]
-        public HttpResponseMessage SaveAnimals(Object model)
+        public HttpResponseMessage SaveUser(Object model)
         {
             try
             {
@@ -42,10 +42,11 @@ namespace FindogWeb.Controllers
                 JToken jUser = JToken.Parse(jsonString);
 
                 User user = new User();
+                user.Id = new Guid(jUser["id"].ToString());
                 user.Date = jUser["date"] == null ? DateTime.Now : jUser["date"].ToObject<DateTime>();
                 user.EmailAddress = jUser["emailAddress"].ToString();
                 user.Name = jUser["name"].ToString();
-                user.PhoneNumber = jUser["phone"].ToString(); 
+                user.PhoneNumber = jUser["phoneNumber"].ToString(); 
 
                 WriteToDatabase.WriteUserToDatabase(user);
 
@@ -60,6 +61,7 @@ namespace FindogWeb.Controllers
                 sb.AppendLine(ex.StackTrace);
                 sb.AppendLine("MESSAGE: " + ex.Message);
                 sb.AppendLine("SOURCE: " + ex.Source);
+                sb.AppendLine(model.ToString());
 
                 File.WriteAllText(@"C:\Users\Lajos\Desktop\debug.txt", sb.ToString());
 

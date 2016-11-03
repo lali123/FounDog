@@ -20,6 +20,8 @@ namespace FindogMobile.Fragments
     {
         const string ARG_PAGE = "ARG_PAGE";
         private int mPage;
+        GoogleMap map;
+        string markerId;
 
         public static MapFragment NewInstance(int page)
         {
@@ -34,7 +36,7 @@ namespace FindogMobile.Fragments
         {
             base.OnCreate(savedInstanceState);
             mPage = Arguments.GetInt(ARG_PAGE);
-            
+
             // Create your fragment here
         }
 
@@ -44,6 +46,7 @@ namespace FindogMobile.Fragments
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             var view = inflater.Inflate(Resource.Layout.MapFragmentPage, container, false);
             var _mapFragment = FragmentManager.FindFragmentByTag("map") as SupportMapFragment;
+
             if (_mapFragment == null)
             {
                 GoogleMapOptions mapOptions = new GoogleMapOptions()
@@ -55,20 +58,45 @@ namespace FindogMobile.Fragments
                 _mapFragment = SupportMapFragment.NewInstance(mapOptions);
                 fragTx.Add(Resource.Id.map, _mapFragment, "map");
                 fragTx.Commit();
-
+                map = _mapFragment.Map;
                 _mapFragment.GetMapAsync(this);
             }
-            //fragment.GetMapAsync(this);
 
             return view;
         }
-
+        
         public void OnMapReady(GoogleMap googleMap)
         {
+            LatLng location = new LatLng(47.5316049, 21.6273123);
             MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.SetPosition(new LatLng(47, 46));
+            markerOptions.SetPosition(new LatLng(location.Latitude, location.Longitude));
             markerOptions.SetTitle("Found dog");
-            googleMap.AddMarker(markerOptions);
+            var marker = googleMap.AddMarker(markerOptions);
+            markerId = marker.Id;
+            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+            builder.Target(location);
+            builder.Zoom(16);
+            CameraPosition cameraPosition = builder.Build();
+            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+
+            googleMap.AnimateCamera(cameraUpdate);
+            googleMap.MyLocationEnabled = true;
+            map = googleMap;
+            map.MapClick += MapClick;
+        }
+
+        private void MapClick(object sender, GoogleMap.MapClickEventArgs e)
+        {
+            (sender as GoogleMap).Clear();
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.SetPosition(new LatLng(e.Point.Latitude, e.Point.Longitude));
+            markerOptions.SetTitle("Found dog");
+            map.AddMarker(markerOptions);
+            if (Activity is FindDog)
+            {
+                (Activity as FindDog).Longitude = e.Point.Longitude;
+                (Activity as FindDog).Latitude = e.Point.Latitude;
+            }
         }
     }
 }

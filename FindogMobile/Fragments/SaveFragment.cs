@@ -69,6 +69,7 @@ namespace FindogMobile.Fragments
 
             Animal animal = new Animal()
             {
+                UserId = MobileUser.Instance().User.Id,
                 Date = DateTime.Now,
                 Description = (Activity as FindDog).Description,
                 Latitude = (Activity as FindDog).Latitude,
@@ -86,16 +87,23 @@ namespace FindogMobile.Fragments
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(WebApiConnection.Instance().ConnectionString);
-                    //client.DefaultRequestHeaders.Accept.Clear();
-                    //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
                     var json = JsonConvert.SerializeObject(animal, settings);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                     // HTTP POST
-                    HttpResponseMessage response = await client.PostAsync("animal/savefound", content);
+                    string postString = "";
+                    if (App.UploadAnimal.Equals("found"))
+                    {
+                        postString = "animal/savefound";
+                    }
+                    else if (App.UploadAnimal.Equals("lost"))
+                    {
+                        postString = "animal/savewanted";
+                    }
+                    HttpResponseMessage response = await client.PostAsync(postString, content);
                     if (response.IsSuccessStatusCode)
                     {
                         string data = await response.Content.ReadAsStringAsync();
-                        //animal = JsonConvert.DeserializeObject<Animal>(data);
                     }
                 }
             }

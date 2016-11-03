@@ -38,7 +38,13 @@ namespace FindogMobile
                   {
                       case "Found a dog":
                           Intent intentFind = new Intent(this, typeof(FindDog));
+                          App.UploadAnimal = "found";
                           StartActivity(intentFind);
+                          break;
+                      case "Lost my dog":
+                          Intent intentLost = new Intent(this, typeof(FindDog));
+                          App.UploadAnimal = "lost";
+                          StartActivity(intentLost);
                           break;
                       case "Found dogs":
                           Intent intentFound = new Intent(this, typeof(FoundDog));
@@ -78,6 +84,7 @@ namespace FindogMobile
         public static File _file;
         public static File _dir;
         public static Bitmap bitmap;
+        public static string UploadAnimal;
     }
 }
 
