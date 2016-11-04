@@ -13,12 +13,13 @@ namespace BusinessLogic.Services
     {
         public static List<User> ReadUsersFromDatabase()
         {
-            return Database.Instance.FindUsers((e)=> { return true; });
+            return Database.Instance.FindUsers((e) => { return true; });
         }
 
         public static List<User> ReadUsersFromDatabase(string name)
         {
-            return Database.Instance.FindUsers((e) => {
+            return Database.Instance.FindUsers((e) =>
+            {
                 if (string.Equals(e.Name, name, StringComparison.InvariantCultureIgnoreCase))
                 {
                     return true;
@@ -33,6 +34,21 @@ namespace BusinessLogic.Services
         public static List<Animal> ReadAnimalFromDatabase()
         {
             return Database.Instance.FindFoundAnimals((e) => { return true; });
+        }
+
+        public static List<Animal> ReadAnimalFromDatabase(string userId)
+        {
+            return Database.Instance.FindFoundAnimals((e) =>
+            {
+                if (e.UserId.Equals(new Guid(userId)))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            });
         }
 
         //public static List<Animal> ReadAnimalFromDatabaseByLocation(GeoCoordinate coordinate)

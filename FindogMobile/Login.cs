@@ -22,7 +22,7 @@ using FindogMobile.Models;
 
 namespace FindogMobile
 {
-    [Activity(Label = "Login", MainLauncher = true, Icon = "@drawable/Dog")]
+    [Activity(Label = "Login",  Icon = "@drawable/Dog")]
     public class Login : Activity
     {
         EditText txtName;
@@ -45,15 +45,13 @@ namespace FindogMobile
             txtEmail = FindViewById<EditText>(Resource.Id.input_email);
             txtPhoneNumber = FindViewById<EditText>(Resource.Id.input_phone);
 
-            if (UserAlreadyRegistered())
+            if (App.IsUserAlreadyRegistered)
             {
                 Intent intentMain = new Intent(this, typeof(MainActivity));
                 StartActivity(intentMain);
             }
             else
             {
-                
-
                 txtName.TextChanged += EditTextChanged;
                 txtPassword.TextChanged += EditTextChanged;
                 txtEmail.TextChanged += EditTextChanged;
@@ -80,95 +78,6 @@ namespace FindogMobile
             }
         }
 
-        private bool UserAlreadyRegistered()
-        {
-            try
-            {
-                ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
-
-                User user = new User()
-                {
-                    // Date = prefs.GetString("Date", DateTime.Now.ToString()),
-                    EmailAddress = prefs.GetString("Email", ""),
-                    Name = prefs.GetString("Name", ""),
-                    PhoneNumber = prefs.GetString("Phone", ""),
-                    Id = new Guid(prefs.GetString("Id", ""))
-                };
-                MobileUser.Instance().User = user;
-
-                List<User> users = GetUsersFromDb();
-                foreach (var u in users)
-                {
-                    if (u.Name.Equals(user.Name) && u.PhoneNumber.Equals(user.PhoneNumber))
-                    {
-                        return true;
-                    }
-                }
-
-                txtName.Text = prefs.GetString("Name", "");
-                txtEmail.Text = prefs.GetString("Email", "");
-                txtPassword.Text = prefs.GetString("Password", "");
-                txtPhoneNumber.Text = prefs.GetString("Phone", "");
-
-            }
-            catch (Exception)
-            {
-                Toast.MakeText(this, "Cannot connect to the server", ToastLength.Short).Show();
-
-                return false;
-            }
-
-
-            return false;
-        }
-
-        private List<User> GetUsersFromDb()
-        {
-            string responseFromServer = String.Empty;
-            List<User> users = new List<User>();
-
-            try
-            {
-                // Create a request for the URL. 		
-                WebRequest request = WebRequest.Create(WebApiConnection.Instance().ConnectionString + @"user/users");
-                // If required by the server, set the credentials.
-                request.Credentials = CredentialCache.DefaultCredentials;
-                // Get the response.
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                {
-                    // Get the stream containing content returned by the server.
-                    using (Stream dataStream = response.GetResponseStream())
-                    {
-                        // Read the content.
-                        using (StreamReader reader = new StreamReader(dataStream))
-                        {
-                            responseFromServer = reader.ReadToEnd();
-                        }
-                    }
-                }
-
-                JArray jUsers = JArray.Parse(responseFromServer);
-
-                foreach (var u in jUsers)
-                {
-                    User user = new User()
-                    {
-                        //Date = DateTime.Now,
-                        EmailAddress = u["emailAddress"].ToString(),
-                        Name = u["name"].ToString(),
-                        PhoneNumber = u["phoneNumber"].ToString(),
-                    };
-
-                    users.Add(user);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return users;
-        }
 
         private void RegisterUserClick(object sender, EventArgs e)
         {

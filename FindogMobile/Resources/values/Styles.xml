@@ -4,4 +4,7 @@
     <item name="windowNoTitle">true</item>
     <item name="windowActionBar">false</item>
   </style>
+  <style name="Theme.AppCompat.Light.NoActionBar.Splash" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@drawable/SplashScreen2</item>
+  </style>
 </resources>

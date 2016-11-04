@@ -38,12 +38,12 @@ namespace FindogMobile
                   {
                       case "Found a dog":
                           Intent intentFind = new Intent(this, typeof(FindDog));
-                          App.UploadAnimal = "found";
+                          App.Tag = "found";
                           StartActivity(intentFind);
                           break;
                       case "Lost my dog":
                           Intent intentLost = new Intent(this, typeof(FindDog));
-                          App.UploadAnimal = "lost";
+                          App.Tag = "lost";
                           StartActivity(intentLost);
                           break;
                       case "Found dogs":
@@ -71,9 +71,9 @@ namespace FindogMobile
             {
                 new DogMenu { IsGroupHeader = false, Title=MobileUser.Instance().User.Name, Icon = Resource.Drawable.User},
                 new DogMenu { IsGroupHeader = false, Title="Found a dog", Icon=Resource.Drawable.Dog},
-                new DogMenu { IsGroupHeader = false, Title="Lost my dog", Icon=Resource.Drawable.Location},
-                new DogMenu { IsGroupHeader = false, Title="Found dogs", Icon=Resource.Drawable.Search},
-                new DogMenu { IsGroupHeader = false, Title="Wanted dogs", Icon=Resource.Drawable.denied},
+                new DogMenu { IsGroupHeader = false, Title="Lost my dog", Icon=Resource.Drawable.Search},
+                new DogMenu { IsGroupHeader = false, Title="Found dogs", Icon=Resource.Drawable.DogHouse},
+                new DogMenu { IsGroupHeader = false, Title="Wanted dogs", Icon=Resource.Drawable.DogLeash},
                 new DogMenu { IsGroupHeader = false, Title="Exit", Icon=Resource.Drawable.Cancel},
             };
         }
@@ -84,7 +84,8 @@ namespace FindogMobile
         public static File _file;
         public static File _dir;
         public static Bitmap bitmap;
-        public static string UploadAnimal;
+        public static string Tag;
+        public static bool IsUserAlreadyRegistered;
     }
 }
 

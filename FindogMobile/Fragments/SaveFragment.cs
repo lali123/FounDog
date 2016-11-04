@@ -92,11 +92,11 @@ namespace FindogMobile.Fragments
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                     // HTTP POST
                     string postString = "";
-                    if (App.UploadAnimal.Equals("found"))
+                    if (App.Tag.Equals("found"))
                     {
                         postString = "animal/savefound";
                     }
-                    else if (App.UploadAnimal.Equals("lost"))
+                    else if (App.Tag.Equals("lost"))
                     {
                         postString = "animal/savewanted";
                     }

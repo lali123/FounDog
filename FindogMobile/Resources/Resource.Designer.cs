@@ -1021,32 +1021,32 @@ namespace FindogMobile
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f070054
-			public const int abc_background_cache_hint_selector_material_dark = 2131165268;
-			
 			// aapt resource value: 0x7f070055
-			public const int abc_background_cache_hint_selector_material_light = 2131165269;
+			public const int abc_background_cache_hint_selector_material_dark = 2131165269;
 			
 			// aapt resource value: 0x7f070056
-			public const int abc_color_highlight_material = 2131165270;
+			public const int abc_background_cache_hint_selector_material_light = 2131165270;
+			
+			// aapt resource value: 0x7f070057
+			public const int abc_color_highlight_material = 2131165271;
 			
 			// aapt resource value: 0x7f070011
 			public const int abc_input_method_navigation_guard = 2131165201;
 			
-			// aapt resource value: 0x7f070057
-			public const int abc_primary_text_disable_only_material_dark = 2131165271;
-			
 			// aapt resource value: 0x7f070058
-			public const int abc_primary_text_disable_only_material_light = 2131165272;
+			public const int abc_primary_text_disable_only_material_dark = 2131165272;
 			
 			// aapt resource value: 0x7f070059
-			public const int abc_primary_text_material_dark = 2131165273;
+			public const int abc_primary_text_disable_only_material_light = 2131165273;
 			
 			// aapt resource value: 0x7f07005a
-			public const int abc_primary_text_material_light = 2131165274;
+			public const int abc_primary_text_material_dark = 2131165274;
 			
 			// aapt resource value: 0x7f07005b
-			public const int abc_search_url_text = 2131165275;
+			public const int abc_primary_text_material_light = 2131165275;
+			
+			// aapt resource value: 0x7f07005c
+			public const int abc_search_url_text = 2131165276;
 			
 			// aapt resource value: 0x7f070012
 			public const int abc_search_url_text_normal = 2131165202;
@@ -1057,17 +1057,20 @@ namespace FindogMobile
 			// aapt resource value: 0x7f070014
 			public const int abc_search_url_text_selected = 2131165204;
 			
-			// aapt resource value: 0x7f07005c
-			public const int abc_secondary_text_material_dark = 2131165276;
-			
 			// aapt resource value: 0x7f07005d
-			public const int abc_secondary_text_material_light = 2131165277;
+			public const int abc_secondary_text_material_dark = 2131165277;
+			
+			// aapt resource value: 0x7f07005e
+			public const int abc_secondary_text_material_light = 2131165278;
 			
 			// aapt resource value: 0x7f070015
 			public const int accent_material_dark = 2131165205;
 			
 			// aapt resource value: 0x7f070016
 			public const int accent_material_light = 2131165206;
+			
+			// aapt resource value: 0x7f070054
+			public const int background = 2131165268;
 			
 			// aapt resource value: 0x7f070017
 			public const int background_floating_material_dark = 2131165207;
@@ -1108,8 +1111,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f070008
 			public const int common_action_bar_splitter = 2131165192;
 			
-			// aapt resource value: 0x7f07005e
-			public const int common_google_signin_btn_text_dark = 2131165278;
+			// aapt resource value: 0x7f07005f
+			public const int common_google_signin_btn_text_dark = 2131165279;
 			
 			// aapt resource value: 0x7f070009
 			public const int common_google_signin_btn_text_dark_default = 2131165193;
@@ -1123,8 +1126,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f07000a
 			public const int common_google_signin_btn_text_dark_pressed = 2131165194;
 			
-			// aapt resource value: 0x7f07005f
-			public const int common_google_signin_btn_text_light = 2131165279;
+			// aapt resource value: 0x7f070060
+			public const int common_google_signin_btn_text_light = 2131165280;
 			
 			// aapt resource value: 0x7f07000d
 			public const int common_google_signin_btn_text_light_default = 2131165197;
@@ -1138,8 +1141,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f07000e
 			public const int common_google_signin_btn_text_light_pressed = 2131165198;
 			
-			// aapt resource value: 0x7f070060
-			public const int common_plus_signin_btn_text_dark = 2131165280;
+			// aapt resource value: 0x7f070061
+			public const int common_plus_signin_btn_text_dark = 2131165281;
 			
 			// aapt resource value: 0x7f070000
 			public const int common_plus_signin_btn_text_dark_default = 2131165184;
@@ -1153,8 +1156,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f070001
 			public const int common_plus_signin_btn_text_dark_pressed = 2131165185;
 			
-			// aapt resource value: 0x7f070061
-			public const int common_plus_signin_btn_text_light = 2131165281;
+			// aapt resource value: 0x7f070062
+			public const int common_plus_signin_btn_text_light = 2131165282;
 			
 			// aapt resource value: 0x7f070004
 			public const int common_plus_signin_btn_text_light_default = 2131165188;
@@ -1309,11 +1312,11 @@ namespace FindogMobile
 			// aapt resource value: 0x7f070048
 			public const int switch_thumb_disabled_material_light = 2131165256;
 			
-			// aapt resource value: 0x7f070062
-			public const int switch_thumb_material_dark = 2131165282;
-			
 			// aapt resource value: 0x7f070063
-			public const int switch_thumb_material_light = 2131165283;
+			public const int switch_thumb_material_dark = 2131165283;
+			
+			// aapt resource value: 0x7f070064
+			public const int switch_thumb_material_light = 2131165284;
 			
 			// aapt resource value: 0x7f070049
 			public const int switch_thumb_normal_material_dark = 2131165257;
@@ -2011,25 +2014,52 @@ namespace FindogMobile
 			public const int Dog = 2130837620;
 			
 			// aapt resource value: 0x7f020075
-			public const int Icon = 2130837621;
+			public const int DogBig = 2130837621;
 			
 			// aapt resource value: 0x7f020076
-			public const int Location = 2130837622;
-			
-			// aapt resource value: 0x7f02007b
-			public const int notification_template_icon_bg = 2130837627;
+			public const int DogFootprint = 2130837622;
 			
 			// aapt resource value: 0x7f020077
-			public const int Pen = 2130837623;
+			public const int DogHouse = 2130837623;
 			
 			// aapt resource value: 0x7f020078
-			public const int PointOnMap = 2130837624;
+			public const int DogLeash = 2130837624;
 			
 			// aapt resource value: 0x7f020079
-			public const int Search = 2130837625;
+			public const int DogPark = 2130837625;
 			
 			// aapt resource value: 0x7f02007a
-			public const int User = 2130837626;
+			public const int Email = 2130837626;
+			
+			// aapt resource value: 0x7f02007b
+			public const int Icon = 2130837627;
+			
+			// aapt resource value: 0x7f02007c
+			public const int Location = 2130837628;
+			
+			// aapt resource value: 0x7f020084
+			public const int notification_template_icon_bg = 2130837636;
+			
+			// aapt resource value: 0x7f02007d
+			public const int Pen = 2130837629;
+			
+			// aapt resource value: 0x7f02007e
+			public const int Phone = 2130837630;
+			
+			// aapt resource value: 0x7f02007f
+			public const int PointOnMap = 2130837631;
+			
+			// aapt resource value: 0x7f020080
+			public const int Search = 2130837632;
+			
+			// aapt resource value: 0x7f020081
+			public const int SplashScreen = 2130837633;
+			
+			// aapt resource value: 0x7f020082
+			public const int SplashScreen2 = 2130837634;
+			
+			// aapt resource value: 0x7f020083
+			public const int User = 2130837635;
 			
 			static Drawable()
 			{
@@ -2056,6 +2086,9 @@ namespace FindogMobile
 			// aapt resource value: 0x7f09009b
 			public const int MainMenuList = 2131296411;
 			
+			// aapt resource value: 0x7f0900af
+			public const int MyUploads = 2131296431;
+			
 			// aapt resource value: 0x7f090081
 			public const int Text = 2131296385;
 			
@@ -2065,8 +2098,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090083
 			public const int Text2 = 2131296387;
 			
-			// aapt resource value: 0x7f0900b0
-			public const int WantedDogsList = 2131296432;
+			// aapt resource value: 0x7f0900b1
+			public const int WantedDogsList = 2131296433;
 			
 			// aapt resource value: 0x7f09009f
 			public const int action0 = 2131296415;
@@ -2143,8 +2176,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090091
 			public const int btnPointOnMap = 2131296401;
 			
-			// aapt resource value: 0x7f0900af
-			public const int btnSaveDog = 2131296431;
+			// aapt resource value: 0x7f0900b0
+			public const int btnSaveDog = 2131296432;
 			
 			// aapt resource value: 0x7f090099
 			public const int btn_login = 2131296409;
@@ -3763,6 +3796,9 @@ namespace FindogMobile
 			
 			// aapt resource value: 0x7f0b0144
 			public const int Theme_AppCompat_Light_NoActionBar_FullScreen = 2131427652;
+			
+			// aapt resource value: 0x7f0b0145
+			public const int Theme_AppCompat_Light_NoActionBar_Splash = 2131427653;
 			
 			// aapt resource value: 0x7f0b00e9
 			public const int Theme_AppCompat_NoActionBar = 2131427561;

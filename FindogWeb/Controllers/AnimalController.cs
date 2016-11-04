@@ -37,11 +37,11 @@ namespace FindogWeb.Controllers
         }
 
         // GET: Animal
-        [Route("{name}")]
+        [Route("foundanimal/{userId}")]
         [HttpGet]
-        public List<Animal> GetAnimal(string name)
+        public List<Animal> GetAnimal(string userId)
         {
-            return ReadFromDatabase.ReadAnimalFromDatabase();
+            return ReadFromDatabase.ReadAnimalFromDatabase(userId);
         }
 
         [Route("savefound")]

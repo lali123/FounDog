@@ -19,8 +19,9 @@ namespace FindogMobile.Fragments
         const string ARG_PAGE = "ARG_PAGE";
         private int mPage;
 
-        EditText descriptionEditView, breedEditView;
+        public EditText descriptionEditView, breedEditView;
         public ImageView dogImageView;
+        Fragment saveFragment;
 
         public static FindogDetailsFragment NewInstance(int page)
         {
@@ -46,7 +47,7 @@ namespace FindogMobile.Fragments
             descriptionEditView = view.FindViewById<EditText>(Resource.Id.etDescription);
             breedEditView = view.FindViewById<EditText>(Resource.Id.etBreed);
             dogImageView = view.FindViewById<ImageView>(Resource.Id.imageViewDogPicture);
-
+            
             descriptionEditView.TextChanged += (s, e) =>
             {
                 if (Activity is FindDog)

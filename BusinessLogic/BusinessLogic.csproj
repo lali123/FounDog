@@ -61,7 +61,6 @@
     <Compile Include="Services\ReadFromDatabase.cs" />
     <Compile Include="Services\WriteToDatabase.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

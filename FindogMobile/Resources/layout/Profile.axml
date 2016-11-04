@@ -3,32 +3,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
-  <LinearLayout
-      android:orientation="vertical"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:paddingTop="56dp"
-      android:paddingLeft="24dp"
-      android:paddingRight="24dp">
-
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <!--  Name Label -->
-    <TextView
-        android:id="@+id/tvUserName"
-        android:layout_width="match_parent"
+      <TableLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Name" />
-    <!-- Email Label -->
-    <TextView
-        android:id="@+id/tvUserEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email" />
-    <!-- Phone Label -->
-    <TextView
-        android:id="@+id/tvUserPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone number" />
-
-  </LinearLayout>
+        android:stretchColumns="1">
+        <TableRow>
+          <ImageView
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:layout_alignParentLeft="true"
+              android:layout_marginLeft="8dp"
+              android:layout_marginRight="8dp"
+              android:layout_marginTop="8dp"
+              android:src="@drawable/User" />
+          <TextView
+              android:id="@+id/tvUserName"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="18dp" />
+        </TableRow>
+        <TableRow>
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/Email" />
+            <TextView
+                android:id="@+id/tvUserEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp" />
+          </TableRow>
+          <TableRow>
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/Phone" />
+            <TextView
+                android:id="@+id/tvUserPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp" />
+          </TableRow>
+          <TableRow>
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/Search" />
+            <TextView
+                android:text="List of found dogs by me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp" />
+          </TableRow>
+      </TableLayout>
+      <ListView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/MyUploads" />
+    </LinearLayout>
 </ScrollView>

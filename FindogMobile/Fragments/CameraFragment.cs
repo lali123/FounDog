@@ -25,7 +25,7 @@ namespace FindogMobile.Fragments
         private static CameraFragment _instance = new CameraFragment();
         const string ARG_PAGE = "ARG_PAGE";
         private int mPage;
-        ImageView takePictureImageView;
+        public ImageView takePictureImageView;
 
         public static CameraFragment NewInstance(int page)
         {
@@ -41,6 +41,7 @@ namespace FindogMobile.Fragments
         {
             base.OnCreate(savedInstanceState);
             mPage = Arguments.GetInt(ARG_PAGE);
+            Activity.Window.SetSoftInputMode(SoftInput.StateHidden);
             // Create your fragment here
         }
 
@@ -50,18 +51,22 @@ namespace FindogMobile.Fragments
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
             var view = inflater.Inflate(Resource.Layout.CameraFragmentPage, container, false);
 
+            Activity.Window.SetSoftInputMode(SoftInput.StateHidden);
             takePictureImageView = view.FindViewById<ImageView>(Resource.Id.imgTakePicture);
             if (IsThereAnAppToTakePictures())
             {
                 CreateDirectoryForPictures();
 
-                takePictureImageView.Click += (s, e) =>
+                if (!FindogMobile.App.Tag.Equals("description"))
                 {
-                    Intent intent = new Intent(MediaStore.ActionImageCapture);
-                    App._file = new Java.IO.File(App._dir, String.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
-                    intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(App._file));
-                    StartActivityForResult(intent, 0);
-                };
+                    takePictureImageView.Click += (s, e) =>
+                    {
+                        Intent intent = new Intent(MediaStore.ActionImageCapture);
+                        App._file = new Java.IO.File(App._dir, String.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
+                        intent.PutExtra(MediaStore.ExtraOutput, Android.Net.Uri.FromFile(App._file));
+                        StartActivityForResult(intent, 0);
+                    };
+                }                
             }
 
             return view;

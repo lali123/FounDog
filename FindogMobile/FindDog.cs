@@ -8,6 +8,8 @@ using Android.Support.V7.App;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V7.Widget;
+using Android.Views.InputMethods;
+using Android.Content;
 
 namespace FindogMobile
 {
@@ -42,7 +44,31 @@ namespace FindogMobile
                         if (f is FindogDetailsFragment)
                         {
                             (f as FindogDetailsFragment).RefreshImage();
-                            break;
+                            InputMethodManager inputManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+                            var currentFocus = (f as FindogDetailsFragment).breedEditView;
+                            if (currentFocus != null)
+                            {
+                                inputManager.HideSoftInputFromWindow(currentFocus.WindowToken, HideSoftInputFlags.None);
+                            }
+                            //break;
+                        }
+                        else if (f is CameraFragment)
+                        {
+                            InputMethodManager inputManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+                            var currentFocus = this.CurrentFocus;
+                            if (currentFocus != null)
+                            {
+                                inputManager.HideSoftInputFromWindow(currentFocus.WindowToken, HideSoftInputFlags.None);
+                            }
+                        }
+                        else if (f is MapFragment)
+                        {
+                            InputMethodManager inputManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+                            var currentFocus = this.CurrentFocus;
+                            if (currentFocus != null)
+                            {
+                                inputManager.HideSoftInputFromWindow(currentFocus.WindowToken, HideSoftInputFlags.None);
+                            }
                         }
                     }
                 }

@@ -18,28 +18,12 @@ using Android.Gms.Maps.Model;
 namespace FindogMobile
 {
     [Activity(Label = "DogDescription")]
-    public class DogDescription : Activity, IOnMapReadyCallback
+    public class DogDescription : Activity
     {
         TextView descriptionTextView, breedTextView, ownerNameTextView, ownerEmailTextView;
         ImageView dogImageView;
         Animal animal;
-
-        public void OnMapReady(GoogleMap googleMap)
-        {
-            LatLng location = new LatLng(animal.Latitude, animal.Longitude);
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.SetPosition(new LatLng(location.Latitude, location.Longitude));
-            markerOptions.SetTitle("Found dog");
-            
-            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-            builder.Target(location);
-            builder.Zoom(16);
-            CameraPosition cameraPosition = builder.Build();
-            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-
-            googleMap.AnimateCamera(cameraUpdate);
-        }
-
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -70,23 +54,7 @@ namespace FindogMobile
 
             Bitmap bm = BitmapFactory.DecodeByteArray(animal.Image, 0, animal.Image.Length);
             dogImageView.SetImageBitmap(bm);
-
-            var _mapFragment = FragmentManager.FindFragmentByTag("mapDescriptions") as MapFragment;
-
-            if (_mapFragment == null)
-            {
-                GoogleMapOptions mapOptions = new GoogleMapOptions()
-                    .InvokeMapType(GoogleMap.MapTypeHybrid)
-                    .InvokeZoomControlsEnabled(true)
-                    .InvokeCompassEnabled(true);
-
-                FragmentTransaction fragTx = FragmentManager.BeginTransaction();
-                _mapFragment = MapFragment.NewInstance(mapOptions);
-                fragTx.Add(Resource.Id.map, _mapFragment, "mapDescriptions");
-                fragTx.Commit();
-
-                _mapFragment.GetMapAsync(this);
-            }
+            
         }
     }
 }
