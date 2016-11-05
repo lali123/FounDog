@@ -37,13 +37,6 @@ namespace FindogMobile
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Login);
             // Create your application here
-            btnLogin = FindViewById<Button>(Resource.Id.btn_login);
-            btnRegister = FindViewById<Button>(Resource.Id.btn_register);
-            
-            txtName = FindViewById<EditText>(Resource.Id.input_name);
-            txtPassword = FindViewById<EditText>(Resource.Id.input_password);
-            txtEmail = FindViewById<EditText>(Resource.Id.input_email);
-            txtPhoneNumber = FindViewById<EditText>(Resource.Id.input_phone);
 
             if (App.IsUserAlreadyRegistered)
             {
@@ -52,10 +45,19 @@ namespace FindogMobile
             }
             else
             {
+
+                txtName = FindViewById<EditText>(Resource.Id.input_name);
+                txtPassword = FindViewById<EditText>(Resource.Id.input_password);
+                txtEmail = FindViewById<EditText>(Resource.Id.input_email);
+                txtPhoneNumber = FindViewById<EditText>(Resource.Id.input_phone);
+
                 txtName.TextChanged += EditTextChanged;
                 txtPassword.TextChanged += EditTextChanged;
                 txtEmail.TextChanged += EditTextChanged;
                 txtPhoneNumber.TextChanged += EditTextChanged;
+
+                btnLogin = FindViewById<Button>(Resource.Id.btn_login);
+                btnRegister = FindViewById<Button>(Resource.Id.btn_register);
 
                 btnRegister.Click += RegisterUserClick;
                 btnLogin.Click += LoginClick;

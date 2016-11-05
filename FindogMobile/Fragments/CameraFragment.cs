@@ -21,8 +21,7 @@ namespace FindogMobile.Fragments
 {
     public class CameraFragment : Android.Support.V4.App.Fragment
     {
-
-        private static CameraFragment _instance = new CameraFragment();
+        
         const string ARG_PAGE = "ARG_PAGE";
         private int mPage;
         public ImageView takePictureImageView;

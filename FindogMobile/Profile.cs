@@ -14,6 +14,7 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using FindogMobile.Adapters;
+using BusinessLogic.Models;
 
 namespace FindogMobile
 {
@@ -52,9 +53,9 @@ namespace FindogMobile
 
 
 
-        private List<Dog> FetchAnimalsAsync()
+        private List<Animal> FetchAnimalsAsync()
         {
-            List<Dog> dogs = new List<Dog>();
+            List<Animal> dogs = new List<Animal>();
             try
             {
                 string responseFromServer = String.Empty;
@@ -80,7 +81,8 @@ namespace FindogMobile
 
                 foreach (var animal in animals)
                 {
-                    Dog dog = new Dog();
+                    Animal dog = new Animal();
+                    dog.UserId = new Guid(animal["userId"].ToString());
                     dog.Breed = animal["breed"].ToString();
                     dog.Description = animal["description"].ToString();
                     dog.Date = animal["date"].ToObject<DateTime>();

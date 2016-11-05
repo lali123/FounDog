@@ -14,6 +14,7 @@ using FindogMobile.Models;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using BusinessLogic.Models;
 
 namespace FindogMobile
 {
@@ -36,12 +37,23 @@ namespace FindogMobile
                 var listView = s as ListView;
                 var t = result[e.Position];
                 Toast.MakeText(this, t.Breed, ToastLength.Short).Show();
+                Intent intent = new Intent(this, typeof(DogDescription));
+                Bundle bundle = new Bundle();
+                bundle.PutString("userId", t.UserId.ToString());
+                bundle.PutString("breed", t.Breed);
+                bundle.PutDouble("latitude", t.Latitude);
+                bundle.PutString("description", t.Description);
+                bundle.PutByteArray("image", t.Image);
+                bundle.PutDouble("longitude", t.Longitude);
+                bundle.PutDouble("latitude", t.Latitude);
+                intent.PutExtra("bundle", bundle);
+                StartActivity(intent);
             };
         }
 
-        private List<Dog> FetchAnimalsAsync()
+        private List<Animal> FetchAnimalsAsync()
         {
-            List<Dog> dogs = new List<Dog>();
+            List<Animal> dogs = new List<Animal>();
             try
             {
                 string responseFromServer = String.Empty;
@@ -68,7 +80,8 @@ namespace FindogMobile
 
                 foreach (var animal in animals)
                 {
-                    Dog dog = new Dog();
+                    Animal dog = new Animal();
+                    dog.UserId = new Guid(animal["userId"].ToString());
                     dog.Breed = animal["breed"].ToString();
                     dog.Description = animal["description"].ToString();
                     dog.Date = animal["date"].ToObject<DateTime>();

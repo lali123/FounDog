@@ -11,14 +11,15 @@ using Android.Views;
 using Android.Widget;
 using FindogMobile.Models;
 using Android.Graphics;
+using BusinessLogic.Models;
 
 namespace FindogMobile.Adapters
 {
-    public class DogAdapter : BaseAdapter<Dog>
+    public class DogAdapter : BaseAdapter<Animal>
     {
-        List<Dog> items;
+        List<Animal> items;
         Activity context;
-        public DogAdapter(Activity context, List<Dog> items)
+        public DogAdapter(Activity context, List<Animal> items)
        : base()
         {
             this.context = context;
@@ -28,7 +29,7 @@ namespace FindogMobile.Adapters
         {
             return position;
         }
-        public override Dog this[int position]
+        public override Animal this[int position]
         {
             get { return items[position]; }
         }
