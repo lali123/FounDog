@@ -20,8 +20,8 @@ namespace FindogMobile.Fragments
         private int mPage;
 
         public EditText descriptionEditView, breedEditView;
+        public TextView latitudeTextView, longitudeTextView;
         public ImageView dogImageView;
-        Fragment saveFragment;
 
         public static FindogDetailsFragment NewInstance(int page)
         {
@@ -47,7 +47,10 @@ namespace FindogMobile.Fragments
             descriptionEditView = view.FindViewById<EditText>(Resource.Id.etDescription);
             breedEditView = view.FindViewById<EditText>(Resource.Id.etBreed);
             dogImageView = view.FindViewById<ImageView>(Resource.Id.imageViewDogPicture);
-            
+            latitudeTextView = view.FindViewById<TextView>(Resource.Id.latitudeReadOnly);
+            longitudeTextView = view.FindViewById<TextView>(Resource.Id.longitudeReadOnly);
+            latitudeTextView.Text = 47.5316049.ToString();
+            longitudeTextView.Text = 21.6273123.ToString();
             descriptionEditView.TextChanged += (s, e) =>
             {
                 if (Activity is FindDog)

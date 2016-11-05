@@ -26,5 +26,15 @@ namespace BusinessLogic.Models
         {
             return String.Format("{0} x:{1} y:{2}\n{3}", Date.ToString(),Latitude, Longitude, Description);
         }
+
+        public string AnimalIdToString()
+        {
+            return AnimalId.ToString();
+        }
+
+        public void AnimalIdToObjectId(string AnimalId)
+        {
+            this.AnimalId = new ObjectId(AnimalId);
+        }
     }
 }

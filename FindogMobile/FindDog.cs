@@ -10,6 +10,7 @@ using Android.Support.V4.View;
 using Android.Support.V7.Widget;
 using Android.Views.InputMethods;
 using Android.Content;
+using System;
 
 namespace FindogMobile
 {
@@ -30,54 +31,21 @@ namespace FindogMobile
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.FindDog);
 
+            Latitude = 47.5316049;
+            Longitude = 21.6273123;
+            Breed = "";
+            Description = "";
+
             var adapter = new FindogTabsAdapter(this, SupportFragmentManager);
             findogViewPager = FindViewById<ViewPager>(Resource.Id.pager);
             findogViewPager.Adapter = adapter;
             findogViewPager.CurrentItem = 1;
             findogViewPager.OffscreenPageLimit = 3;
-            findogViewPager.PageSelected += (s, e) =>
-            {
-                if (e.Position == 1)
-                {
-                    foreach (var f in SupportFragmentManager.Fragments)
-                    {
-                        if (f is FindogDetailsFragment)
-                        {
-                            (f as FindogDetailsFragment).RefreshImage();
-                            InputMethodManager inputManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
-                            var currentFocus = (f as FindogDetailsFragment).breedEditView;
-                            if (currentFocus != null)
-                            {
-                                inputManager.HideSoftInputFromWindow(currentFocus.WindowToken, HideSoftInputFlags.None);
-                            }
-                            //break;
-                        }
-                        else if (f is CameraFragment)
-                        {
-                            InputMethodManager inputManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
-                            var currentFocus = this.CurrentFocus;
-                            if (currentFocus != null)
-                            {
-                                inputManager.HideSoftInputFromWindow(currentFocus.WindowToken, HideSoftInputFlags.None);
-                            }
-                        }
-                        else if (f is MapFragment)
-                        {
-                            InputMethodManager inputManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
-                            var currentFocus = this.CurrentFocus;
-                            if (currentFocus != null)
-                            {
-                                inputManager.HideSoftInputFromWindow(currentFocus.WindowToken, HideSoftInputFlags.None);
-                            }
-                        }
-                    }
-                }
-            };
+            findogViewPager.PageSelected += PageSelected;
+            
             //toolbar = FindViewById<Toolbar>(Resource.Id.my_toolbar);
             tabLayout = FindViewById<TabLayout>(Resource.Id.sliding_tabs);
-
-            //SetSupportActionBar(toolbar);
-
+            
             // Setup tablayout with view pager
             tabLayout.SetupWithViewPager(findogViewPager);
             for (int i = 0; i < tabLayout.TabCount; i++)
@@ -85,11 +53,47 @@ namespace FindogMobile
                 TabLayout.Tab tab = tabLayout.GetTabAt(i);
                 tab.SetCustomView(adapter.GetTabView(i));
             }
+        }
 
-            Breed = "";
-            Description = "";
-            Latitude = 0;
-            Longitude = 0;
+        private void PageSelected(object sender, ViewPager.PageSelectedEventArgs e)
+        {
+            if (e.Position == 1)
+            {
+                foreach (var f in SupportFragmentManager.Fragments)
+                {
+                    if (f is FindogDetailsFragment)
+                    {
+                        (f as FindogDetailsFragment).RefreshImage();
+                        (f as FindogDetailsFragment).longitudeTextView.Text = Longitude.ToString();
+                        (f as FindogDetailsFragment).latitudeTextView.Text = Latitude.ToString();
+                        InputMethodManager inputManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+                        var currentFocus = (f as FindogDetailsFragment).breedEditView;
+                        if (currentFocus != null)
+                        {
+                            inputManager.HideSoftInputFromWindow(currentFocus.WindowToken, HideSoftInputFlags.None);
+                        }
+                        //break;
+                    }
+                    else if (f is CameraFragment)
+                    {
+                        InputMethodManager inputManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+                        var currentFocus = this.CurrentFocus;
+                        if (currentFocus != null)
+                        {
+                            inputManager.HideSoftInputFromWindow(currentFocus.WindowToken, HideSoftInputFlags.None);
+                        }
+                    }
+                    else if (f is MapFragment)
+                    {
+                        InputMethodManager inputManager = (InputMethodManager)GetSystemService(Context.InputMethodService);
+                        var currentFocus = this.CurrentFocus;
+                        if (currentFocus != null)
+                        {
+                            inputManager.HideSoftInputFromWindow(currentFocus.WindowToken, HideSoftInputFlags.None);
+                        }
+                    }
+                }
+            }
         }
     }
 }

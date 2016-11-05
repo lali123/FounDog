@@ -23,6 +23,7 @@ namespace FindogMobile
     {
         TextView nameTextView, emailTextView, phoneTextView;
         ListView uploadList;
+        List<Animal> result;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -30,28 +31,70 @@ namespace FindogMobile
             SetContentView(Resource.Layout.Profile);
             // Create your application here
 
-            var result = FetchAnimalsAsync();
-
+            result = FetchAnimalsAsync();
+            var adapter = new DogAdapter(this, result);
             nameTextView = FindViewById<TextView>(Resource.Id.tvUserName);
             emailTextView = FindViewById<TextView>(Resource.Id.tvUserEmail);
             phoneTextView = FindViewById<TextView>(Resource.Id.tvUserPhone);
             uploadList = FindViewById<ListView>(Resource.Id.MyUploads);
-            uploadList.Adapter = new DogAdapter(this, result);
+            uploadList.Adapter = adapter;
             uploadList.ItemClick += (s, e) =>
             {
                 var listView = s as ListView;
                 var t = result[e.Position];
                 Toast.MakeText(this, t.Breed, ToastLength.Short).Show();
             };
+            uploadList.ItemLongClick += (s, e) =>
+            {
+                var listView = s as ListView;
+                var animal = result[e.Position];
+                PopupMenu menu = new PopupMenu(this, uploadList);
+                menu.Inflate(Resource.Menu.PopupMenu);
+                menu.MenuItemClick += (se, ev) =>
+                {
+                    RemoveAnimal(animal.AnimalIdToString());
+                    result.Remove(animal);
+                    
+                    adapter.NotifyDataSetChanged();
+                    Toast.MakeText(this, "Remove", ToastLength.Short).Show();
+                };
+                menu.Show();
+            };
 
-
-                nameTextView.Text = MobileUser.Instance().User.Name;
+            nameTextView.Text = MobileUser.Instance().User.Name;
             emailTextView.Text = MobileUser.Instance().User.EmailAddress;
             phoneTextView.Text = MobileUser.Instance().User.PhoneNumber;
 
         }
 
-
+        private void RemoveAnimal(string id)
+        {
+            try
+            {
+                string responseFromServer = String.Empty;
+                // Create a request for the URL. 		
+                WebRequest request = WebRequest.Create(WebApiConnection.Instance().ConnectionString + @"animal/deletefoundanimal/" + id);
+                // If required by the server, set the credentials.
+                request.Credentials = CredentialCache.DefaultCredentials;
+                // Get the response.
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    // Get the stream containing content returned by the server.
+                    using (Stream dataStream = response.GetResponseStream())
+                    {
+                        // Read the content.
+                        using (StreamReader reader = new StreamReader(dataStream))
+                        {
+                            responseFromServer = reader.ReadToEnd();
+                        }
+                    }
+                }                
+            }
+            catch (Exception)
+            {
+                Toast.MakeText(this, "Cannot connect to the server", ToastLength.Short).Show();
+            }
+        }
 
         private List<Animal> FetchAnimalsAsync()
         {
@@ -82,6 +125,7 @@ namespace FindogMobile
                 foreach (var animal in animals)
                 {
                     Animal dog = new Animal();
+                    dog.AnimalIdToObjectId(animal["animalId"].ToString());
                     dog.UserId = new Guid(animal["userId"].ToString());
                     dog.Breed = animal["breed"].ToString();
                     dog.Description = animal["description"].ToString();

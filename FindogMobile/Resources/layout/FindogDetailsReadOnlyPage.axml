@@ -15,65 +15,65 @@
             android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/photoPreview" />
-      <TableLayout
+        <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:stretchColumns="1">
-        <TableRow>
-          <ImageView
-              android:layout_width="32dp"
-              android:layout_height="32dp"
-              android:src="@drawable/DogFootprint" />
-          <TextView
-              android:id="@+id/breedReadOnly"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="18dp" />
-        </TableRow>
-        <TableRow>
-          <ImageView
-              android:layout_width="32dp"
-              android:layout_height="32dp"
-              android:src="@drawable/Pen" />
-          <TextView
-              android:id="@+id/descriptionReadOnly"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="18dp" />
-        </TableRow>
-        <TableRow>
-          <ImageView
-              android:layout_width="32dp"
-              android:layout_height="32dp"
-              android:src="@drawable/User" />
-          <TextView
-              android:id="@+id/uploaderName"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="18dp" />
-        </TableRow>
-        <TableRow>
-          <ImageView
-              android:layout_width="32dp"
-              android:layout_height="32dp"
-              android:src="@drawable/Phone" />
-          <TextView
-              android:id="@+id/uploaderPhone"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="18dp" />
-        </TableRow>
-        <TableRow>
-          <ImageView
-              android:layout_width="32dp"
-              android:layout_height="32dp"
-              android:src="@drawable/Email" />
-          <TextView
-              android:id="@+id/uploaderEmail"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:textSize="18dp" />
-        </TableRow>
-      </TableLayout>
+            <TableRow>
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/DogFootprint" />
+                <TextView
+                    android:id="@+id/breedReadOnly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp" />
+            </TableRow>
+            <TableRow>
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/Pen" />
+                <TextView
+                    android:id="@+id/descriptionReadOnly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp" />
+            </TableRow>
+            <TableRow>
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/User" />
+                <TextView
+                    android:id="@+id/uploaderName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp" />
+            </TableRow>
+            <TableRow>
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/Phone" />
+                <TextView
+                    android:id="@+id/uploaderPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp" />
+            </TableRow>
+            <TableRow>
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/Email" />
+                <TextView
+                    android:id="@+id/uploaderEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp" />
+            </TableRow>
+        </TableLayout>
     </LinearLayout>
 </ScrollView>

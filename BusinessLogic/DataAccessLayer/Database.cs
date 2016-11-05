@@ -93,5 +93,10 @@ namespace BusinessLogic.DataAccessLayer
         {
             FoundAnimalCollection.InsertOne(animal);
         }
+
+        public void DeleteFoundAnimal(String id)
+        {
+            FoundAnimalCollection.DeleteOne(a=>a.AnimalId == new MongoDB.Bson.ObjectId(id));            
+        }
     }
 }

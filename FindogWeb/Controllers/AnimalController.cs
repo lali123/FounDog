@@ -45,6 +45,7 @@ namespace FindogWeb.Controllers
         }
 
         [Route("savefound")]
+        [HttpPost]
         public HttpResponseMessage SaveFoundAnimals(Object model)
         {
             try
@@ -53,6 +54,7 @@ namespace FindogWeb.Controllers
                 JToken animal = JToken.Parse(jsonString);
 
                 Animal dog = new Animal();
+                //dog.AnimalIdToObjectId(animal["animalId"].ToString());
                 dog.UserId = new Guid(animal["userId"].ToString());
                 dog.Breed = animal["breed"].ToString();
                 dog.Description = animal["description"].ToString();
@@ -85,6 +87,7 @@ namespace FindogWeb.Controllers
 
 
         [Route("savewanted")]
+        [HttpPost]
         public HttpResponseMessage SaveWantedAnimals(Object model)
         {
             try
@@ -93,6 +96,7 @@ namespace FindogWeb.Controllers
                 JToken animal = JToken.Parse(jsonString);
 
                 Animal dog = new Animal();
+                //dog.AnimalIdToObjectId(animal["animalId"].ToObject<ObjectId>);
                 dog.UserId = new Guid(animal["userId"].ToString());
                 dog.Breed = animal["breed"].ToString();
                 dog.Description = animal["description"].ToString();
@@ -121,6 +125,23 @@ namespace FindogWeb.Controllers
                 return Request.CreateResponse(System.Net.HttpStatusCode.ExpectationFailed);
             }
 
+        }
+
+        // GET: Animal
+        [Route("deletefoundanimal/{id}")]
+        [HttpGet]
+        public HttpResponseMessage DeleteAnimal(string id)
+        {
+            try
+            {
+                var response = Request.CreateResponse<string>(System.Net.HttpStatusCode.Accepted, id);
+                DeleteFromDatabase.DeleteFoundAnimal(id);
+                return response;
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, id);
+            }
         }
     }
 }
