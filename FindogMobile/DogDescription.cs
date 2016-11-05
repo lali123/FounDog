@@ -25,8 +25,6 @@ namespace FindogMobile
     public class DogDescription : AppCompatActivity
     {
         private TabLayout tabLayout;
-        //TextView descriptionTextView, breedTextView, ownerNameTextView, ownerEmailTextView;
-        //ImageView dogImageView;
         Animal animal;
         private ViewPager findogViewPager;
 
@@ -34,21 +32,17 @@ namespace FindogMobile
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.DogDescription);
-
-            //descriptionTextView = FindViewById<TextView>(Resource.Id.tvDogDescription);
-            //ownerNameTextView = FindViewById<TextView>(Resource.Id.tvOwnerName);
-            //ownerEmailTextView = FindViewById<TextView>(Resource.Id.tvOwnerEmail);
-            //breedTextView = FindViewById<TextView>(Resource.Id.tvDogBreed);
-            //dogImageView = FindViewById<ImageView>(Resource.Id.ivDogDescription);
-
+            
             Intent intent = Intent;
             Bundle bundle = intent.Extras.GetBundle("bundle");
             animal = new Animal();
+            double lat = bundle.GetDouble("latitude");
+            double lng = bundle.GetDouble("longitude");
             animal.Image = bundle.GetByteArray("image");
             animal.Breed = bundle.GetString("breed");
             animal.Description = bundle.GetString("description");
-            animal.Latitude = bundle.GetDouble("latitude");
-            animal.Longitude = bundle.GetDouble("longitude");
+            animal.Latitude = lat;
+            animal.Longitude = lng;
 
 
             var adapter = new FindogTabsReadOnlyAdapter(this, SupportFragmentManager, animal);
@@ -63,16 +57,6 @@ namespace FindogMobile
                 TabLayout.Tab tab = tabLayout.GetTabAt(i);
                 tab.SetCustomView(adapter.GetTabView(i));
             }
-            //// Create your application here            
-            //ownerNameTextView.Text = MobileUser.Instance().User.Name;
-            //ownerEmailTextView.Text = MobileUser.Instance().User.EmailAddress;
-
-            //descriptionTextView.Text = animal.Description;
-            //breedTextView.Text = animal.Breed;
-
-            //Bitmap bm = BitmapFactory.DecodeByteArray(animal.Image, 0, animal.Image.Length);
-            //dogImageView.SetImageBitmap(bm);
-            
         }
     }
 }
