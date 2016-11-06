@@ -94,9 +94,24 @@ namespace BusinessLogic.DataAccessLayer
             FoundAnimalCollection.InsertOne(animal);
         }
 
-        public void DeleteFoundAnimal(String id)
+        public bool UpdateAnimal(Animal animal)
         {
-            FoundAnimalCollection.DeleteOne(a=>a.AnimalId == new MongoDB.Bson.ObjectId(id));            
+            var filter = Builders<Animal>.Filter.Eq("AnimalId", animal.AnimalId);
+            var update = Builders<Animal>.Update.Set("Breed", animal.Breed)
+                .Set("Description", animal.Description)
+                .Set("Date", animal.Date)
+                .Set("Latitude", animal.Latitude)
+                .Set("Longitude", animal.Longitude)
+                .Set("Image", animal.Image);
+            var updateResult = FoundAnimalCollection.UpdateOne(filter, update);
+            
+            return updateResult.IsAcknowledged;
+        }
+
+        public bool DeleteFoundAnimal(String id)
+        {
+            var deleteResult = FoundAnimalCollection.DeleteOne(a=>a.AnimalId == new MongoDB.Bson.ObjectId(id));
+            return deleteResult.IsAcknowledged;           
         }
     }
 }

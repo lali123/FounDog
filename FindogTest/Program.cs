@@ -27,9 +27,57 @@ namespace FindogTest
             //ReadAnAnimal();
             //ReadAnAnimalByCoordinates();
 
-            TestPost();
+            //TestPost();
+
+            TestUpdate();
 
             Console.ReadKey();
+        }
+
+        private static async void TestUpdate()
+        {
+            var path = Directory.GetCurrentDirectory() + "\\Resources\\dogee.jpeg";
+            var image = new Bitmap(path);
+
+            Image img = Image.FromFile(path);
+            byte[] arr;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                arr = ms.ToArray();
+            }
+
+            Animal animal = new Animal()
+            {
+                UserId = new Guid(),
+                Date = DateTime.Now,
+                Description = "test",
+                Latitude = 47.5371291,
+                Longitude = 21.623794299999986,
+                Breed = "test",
+                Image = arr,
+            };
+
+            var settings = new JsonSerializerSettings();
+            settings.NullValueHandling = NullValueHandling.Ignore;
+            settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:8086/");
+                //client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var json = JsonConvert.SerializeObject(animal, settings);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                // HTTP POST
+                HttpResponseMessage response = await client.PostAsync("animal/updatefoundanimal/581f9d62a314a70524a39d10", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    //animal = JsonConvert.DeserializeObject<Animal>(data);
+                }
+                Console.WriteLine(response.StatusCode);
+            }
         }
 
         class PostClass
@@ -54,6 +102,7 @@ namespace FindogTest
 
             Animal animal = new Animal()
             {
+                UserId = new Guid(),
                 Date = DateTime.Now,
                 Description = "Keverék",
                 Latitude = 47.5371291,

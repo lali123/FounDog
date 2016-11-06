@@ -34,7 +34,10 @@ namespace BusinessLogic.Models
 
         public void AnimalIdToObjectId(string AnimalId)
         {
-            this.AnimalId = new ObjectId(AnimalId);
+            var objId = new ObjectId();
+            ObjectId.TryParse(AnimalId,out objId);
+         
+            this.AnimalId = objId;
         }
     }
 }

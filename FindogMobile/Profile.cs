@@ -32,6 +32,9 @@ namespace FindogMobile
             // Create your application here
 
             result = FetchAnimalsAsync();
+
+            ShowAllertIfItNeed(result);
+            
             var adapter = new DogAdapter(this, result);
             nameTextView = FindViewById<TextView>(Resource.Id.tvUserName);
             emailTextView = FindViewById<TextView>(Resource.Id.tvUserEmail);
@@ -52,11 +55,15 @@ namespace FindogMobile
                 menu.Inflate(Resource.Menu.PopupMenu);
                 menu.MenuItemClick += (se, ev) =>
                 {
+                    if (ev.Item.TitleFormatted.Equals("Delete"))
+                    {
+
+                    }
                     RemoveAnimal(animal.AnimalIdToString());
                     result.Remove(animal);
                     
                     adapter.NotifyDataSetChanged();
-                    Toast.MakeText(this, "Remove", ToastLength.Short).Show();
+                    Toast.MakeText(this, "Deleted", ToastLength.Short).Show();
                 };
                 menu.Show();
             };
@@ -65,6 +72,30 @@ namespace FindogMobile
             emailTextView.Text = MobileUser.Instance().User.EmailAddress;
             phoneTextView.Text = MobileUser.Instance().User.PhoneNumber;
 
+        }
+
+        private void ShowAllertIfItNeed(List<Animal> result)
+        {
+            foreach (var dog in result)
+            {
+                var time = (DateTime.Now - dog.Date);
+                if (time.Days > 30)
+                {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                    alert.SetTitle("One month");
+                    alert.SetMessage(dog.Breed+" has already lost for one month. Do you want to extend the search or delete.");
+                    alert.SetPositiveButton("Extend", (senderAlert, args) => {
+                        Toast.MakeText(this, "Extend!", ToastLength.Short).Show();
+                    });
+
+                    alert.SetNegativeButton("Delete", (senderAlert, args) => {
+                        Toast.MakeText(this, "Delete!", ToastLength.Short).Show();
+                    });
+
+                    Dialog dialog = alert.Create();
+                    dialog.Show();
+                }
+            }
         }
 
         private void RemoveAnimal(string id)

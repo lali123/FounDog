@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.DataAccessLayer;
+using BusinessLogic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
-    public class DeleteFromDatabase
+    public class UpdateDatabase
     {
-        public static bool DeleteFoundAnimal(string id)
+        public static bool UpdateFoundAnimal(Animal animal)
         {
-            return Database.Instance.DeleteFoundAnimal(id);
+            return Database.Instance.UpdateAnimal(animal);
         }
     }
 }
