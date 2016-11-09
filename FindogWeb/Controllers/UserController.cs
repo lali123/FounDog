@@ -31,6 +31,13 @@ namespace FindogWeb.Controllers
             return ReadFromDatabase.ReadUsersFromDatabase(name);
         }
 
+        // GET api/User
+        [Route("id/{id}")]
+        [HttpGet]
+        public List<User> GetUserById(string id)
+        {
+            return ReadFromDatabase.ReadUsersFromDatabaseById(id);
+        }
 
         [Route("registeruser")]
         public HttpResponseMessage SaveUser(Object model)
@@ -42,7 +49,7 @@ namespace FindogWeb.Controllers
                 JToken jUser = JToken.Parse(jsonString);
 
                 User user = new User();
-                user.Id = new Guid(jUser["id"].ToString());
+                user.Id = jUser["id"].ToString();
                 user.Date = jUser["date"] == null ? DateTime.Now : jUser["date"].ToObject<DateTime>();
                 user.EmailAddress = jUser["emailAddress"].ToString();
                 user.Name = jUser["name"].ToString();

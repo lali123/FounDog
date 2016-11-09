@@ -4,6 +4,13 @@
     android:layout_width="match_parent"
     android:background="#ffffff"
     android:layout_height="match_parent">
+  
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/dogtoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F8F8F8"/>
+    
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"

@@ -90,7 +90,7 @@ namespace FindogMobile
             {
                 User user = new User()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.NewGuid().ToString(),
                     Date = DateTime.Now,
                     EmailAddress = txtEmail.Text,
                     Name = txtName.Text,
@@ -98,7 +98,7 @@ namespace FindogMobile
                 };
 
 
-                editor.PutString("Id", user.Id.ToString());
+                editor.PutString("Id", user.Id);
                 editor.PutString("Name", txtName.Text);
                 editor.PutString("Email", txtEmail.Text);
                 editor.PutString("Password", txtPassword.Text);

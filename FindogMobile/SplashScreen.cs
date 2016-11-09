@@ -57,7 +57,7 @@ namespace FindogMobile
                     EmailAddress = prefs.GetString("Email", ""),
                     Name = prefs.GetString("Name", ""),
                     PhoneNumber = prefs.GetString("Phone", ""),
-                    Id = new Guid(prefs.GetString("Id", ""))
+                    Id = prefs.GetString("Id", "")
                 };
                 MobileUser.Instance().User = user;
 
@@ -125,7 +125,7 @@ namespace FindogMobile
             }
             catch (Exception)
             {
-                throw;
+                Toast.MakeText(this, "Cannot connect to the server", ToastLength.Short).Show();
             }
 
             return users;

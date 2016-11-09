@@ -18,10 +18,13 @@ namespace FindogMobile.Adapters
     public class DogAdapter : BaseAdapter<Animal>
     {
         List<Animal> items;
+        List<Animal> temp;
         Activity context;
         public DogAdapter(Activity context, List<Animal> items)
        : base()
         {
+            temp = new List<Animal>();
+            temp.AddRange(items);
             this.context = context;
             this.items = items;
         }
@@ -49,6 +52,32 @@ namespace FindogMobile.Adapters
             view.FindViewById<TextView>(Resource.Id.Text2).Text = item.Date.ToString();
             view.FindViewById<ImageView>(Resource.Id.Image).SetImageBitmap(bm);
             return view;
+        }
+
+        public void Filter(String charText)
+        {
+            charText = charText.ToLower();
+
+            items.Clear();
+            if (charText.Length == 0)
+            {
+                items.AddRange(temp);
+            }
+            else
+            {
+                foreach (Animal animal  in temp)
+                {
+                    if (charText.Length != 0 && animal.Breed.ToLower().Contains(charText))
+                    {
+                        items.Add(animal);
+                    }
+                    else if (charText.Length != 0 && animal.Description.ToLower().Contains(charText))
+                    {
+                        items.Add(animal);
+                    }
+                }
+            }
+            NotifyDataSetChanged();
         }
     }
 }

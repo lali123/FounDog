@@ -7,28 +7,23 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
-using System.Json;
-using System.Threading.Tasks;
-using System.Net;
-using System.IO;
-using System.Net.Http;
 using Newtonsoft.Json;
 using BusinessLogic.Models;
-using System.Net.Http.Headers;
-using Android.Graphics;
-using Java.IO;
-using Newtonsoft.Json.Serialization;
-using Android.Graphics.Drawables;
-using FindogMobile.Helpers;
 using FindogMobile.Models;
+using Newtonsoft.Json.Serialization;
+using System.Net.Http;
+using Android.Graphics;
+using FindogMobile.Helpers;
+using System.IO;
 
 namespace FindogMobile.Fragments
 {
-    public class SaveFragment : Fragment
+    public class UpdateFragment : Fragment
     {
-        Button saveDog;
+        Button updateDog;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,13 +32,13 @@ namespace FindogMobile.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View view = inflater.Inflate(Resource.Layout.SaveFounDog, container, false);
-            saveDog = view.FindViewById<Button>(Resource.Id.btnSaveDog);
+            View view = inflater.Inflate(Resource.Layout.UpdateDog, container, false);
+            updateDog = view.FindViewById<Button>(Resource.Id.btnUpdateDog);
 
-            saveDog.Click += (s, e) =>
-           {
-               FetchAnimalsAsync();
-           };
+            updateDog.Click += (s, e) =>
+            {
+                FetchAnimalsAsync();
+            };
 
             return view;
         }
@@ -71,12 +66,21 @@ namespace FindogMobile.Fragments
             {
                 UserId = MobileUser.Instance().User.Id,
                 Date = DateTime.Now,
-                Description = (Activity as FindDog).Description,
-                Latitude = (Activity as FindDog).Latitude,
-                Longitude = (Activity as FindDog).Longitude,
-                Breed = (Activity as FindDog).Breed,
+                Description = (Activity as UpdateFindog).Description,
+                Latitude = (Activity as UpdateFindog).Latitude,
+                Longitude = (Activity as UpdateFindog).Longitude,
+                Breed = (Activity as UpdateFindog).Breed,
                 Image = byteArray,
             };
+            string postString = "";
+            if (App.Tag.Equals("found"))
+            {
+                postString = "animal/updatefoundanimal/";
+            }
+            else if (App.Tag.Equals("lost"))
+            {
+                postString = "animal/wantedanimals/";
+            }
 
             try
             {
@@ -91,15 +95,7 @@ namespace FindogMobile.Fragments
                     var json = JsonConvert.SerializeObject(animal, settings);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                     // HTTP POST
-                    string postString = "";
-                    if (App.Tag.Equals("found"))
-                    {
-                        postString = "animal/savefound";
-                    }
-                    else if (App.Tag.Equals("lost"))
-                    {
-                        postString = "animal/savewanted";
-                    }
+                    
                     HttpResponseMessage response = await client.PostAsync(postString, content);
                     if (response.IsSuccessStatusCode)
                     {

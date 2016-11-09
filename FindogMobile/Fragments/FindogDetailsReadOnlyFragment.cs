@@ -12,6 +12,10 @@ using Android.Views;
 using Android.Widget;
 using BusinessLogic.Models;
 using Android.Graphics;
+using Newtonsoft.Json.Linq;
+using System.Net;
+using System.IO;
+using FindogMobile.Models;
 
 namespace FindogMobile.Fragments
 {
@@ -60,7 +64,69 @@ namespace FindogMobile.Fragments
             tvBreed.Text = mDog.Breed;
             tvDescription.Text = mDog.Description;
 
+            var users = GetUsersFromDb();
+
+            var mobileUser = MobileUser.Instance().User;
+            foreach (var user in users)
+            {
+                if (user.Id.Equals(mDog.UserId))
+                {
+                    tvUploaderName.Text = user.Name;
+                    tvUploaderEmail.Text = user.EmailAddress;
+                    tvUploaderPhone.Text = user.PhoneNumber;
+                }
+            }
+
             return view;
+        }
+
+        private List<User> GetUsersFromDb()
+        {
+            string responseFromServer = String.Empty;
+            List<User> users = new List<User>();
+
+            try
+            {
+                // Create a request for the URL. 		
+                WebRequest request = WebRequest.Create(WebApiConnection.Instance().ConnectionString + @"user/id/" + mDog.UserId);
+                // If required by the server, set the credentials.
+                request.Credentials = CredentialCache.DefaultCredentials;
+                // Get the response.
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    // Get the stream containing content returned by the server.
+                    using (Stream dataStream = response.GetResponseStream())
+                    {
+                        // Read the content.
+                        using (StreamReader reader = new StreamReader(dataStream))
+                        {
+                            responseFromServer = reader.ReadToEnd();
+                        }
+                    }
+                }
+
+                JArray jUsers = JArray.Parse(responseFromServer);
+
+                foreach (var u in jUsers)
+                {
+                    User user = new User()
+                    {
+                        //Date = DateTime.Now,
+                        Id = u["id"].ToString(),
+                        EmailAddress = u["emailAddress"].ToString(),
+                        Name = u["name"].ToString(),
+                        PhoneNumber = u["phoneNumber"].ToString(),
+                    };
+
+                    users.Add(user);
+                }
+            }
+            catch (Exception)
+            {
+                Toast.MakeText(this.Activity, "Cannot connect to the server", ToastLength.Short).Show();
+            }
+
+            return users;
         }
     }
 }

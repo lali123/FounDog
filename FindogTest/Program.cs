@@ -49,7 +49,7 @@ namespace FindogTest
 
             Animal animal = new Animal()
             {
-                UserId = new Guid(),
+                UserId = Guid.NewGuid().ToString(),
                 Date = DateTime.Now,
                 Description = "test",
                 Latitude = 47.5371291,
@@ -70,7 +70,7 @@ namespace FindogTest
                 var json = JsonConvert.SerializeObject(animal, settings);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 // HTTP POST
-                HttpResponseMessage response = await client.PostAsync("animal/updatefoundanimal/581f9d62a314a70524a39d10", content);
+                HttpResponseMessage response = await client.PostAsync("animal/updatefoundanimal/"+animal.AnimalIdToString(), content);
                 if (response.IsSuccessStatusCode)
                 {
                     string data = await response.Content.ReadAsStringAsync();
@@ -102,7 +102,7 @@ namespace FindogTest
 
             Animal animal = new Animal()
             {
-                UserId = new Guid(),
+                UserId = Guid.NewGuid().ToString(),
                 Date = DateTime.Now,
                 Description = "Keverék",
                 Latitude = 47.5371291,

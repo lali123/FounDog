@@ -12,7 +12,7 @@ namespace BusinessLogic.DataAccessLayer
     {
         private static IMongoClient _client;
         private static IMongoDatabase _database;
-
+        
         public IMongoDatabase AnimalsDatabase
         {
             get { return _database; }
@@ -107,11 +107,32 @@ namespace BusinessLogic.DataAccessLayer
             
             return updateResult.IsAcknowledged;
         }
+        
+        public bool UpdateWantedAnimal(Animal animal)
+        {
+            var filter = Builders<Animal>.Filter.Eq("AnimalId", animal.AnimalId);
+            var update = Builders<Animal>.Update.Set("Breed", animal.Breed)
+                .Set("Description", animal.Description)
+                .Set("Date", animal.Date)
+                .Set("Latitude", animal.Latitude)
+                .Set("Longitude", animal.Longitude)
+                .Set("Image", animal.Image);
+            var updateResult = WantedAnimalCollection.UpdateOne(filter, update);
+
+            return updateResult.IsAcknowledged;
+        }
+
 
         public bool DeleteFoundAnimal(String id)
         {
             var deleteResult = FoundAnimalCollection.DeleteOne(a=>a.AnimalId == new MongoDB.Bson.ObjectId(id));
             return deleteResult.IsAcknowledged;           
+        }
+
+        public bool DeleteWantedAnimal(String id)
+        {
+            var deleteResult = WantedAnimalCollection.DeleteOne(a => a.AnimalId == new MongoDB.Bson.ObjectId(id));
+            return deleteResult.IsAcknowledged;
         }
     }
 }

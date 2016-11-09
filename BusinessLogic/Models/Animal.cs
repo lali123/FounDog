@@ -14,7 +14,7 @@ namespace BusinessLogic.Models
     {
         [BsonId]
         public ObjectId AnimalId { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }
         public double Latitude { get; set; }

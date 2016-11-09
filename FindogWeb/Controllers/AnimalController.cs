@@ -37,11 +37,19 @@ namespace FindogWeb.Controllers
         }
 
         // GET: Animal
-        [Route("foundanimal/{userId}")]
+        [Route("foundanimals/{userId}")]
         [HttpGet]
-        public List<Animal> GetAnimal(string userId)
+        public List<Animal> GetFoundAnimal(string userId)
         {
             return ReadFromDatabase.ReadAnimalFromDatabase(userId);
+        }
+
+        // GET: Animal
+        [Route("wantedanimals/{userId}")]
+        [HttpGet]
+        public List<Animal> GetWantedAnimals(string userId)
+        {
+            return ReadFromDatabase.ReadWantedAnimalFromDatabase(userId);
         }
 
         [Route("savefound")]
@@ -55,7 +63,7 @@ namespace FindogWeb.Controllers
 
                 Animal dog = new Animal();
                 dog.AnimalIdToObjectId(animal["animalId"].ToString());
-                dog.UserId = new Guid(animal["userId"].ToString());
+                dog.UserId = animal["userId"].ToString();
                 dog.Breed = animal["breed"].ToString();
                 dog.Description = animal["description"].ToString();
                 dog.Date = animal["date"] == null ? DateTime.Now : animal["date"].ToObject<DateTime>();
@@ -63,6 +71,10 @@ namespace FindogWeb.Controllers
                 dog.Longitude = animal["longitude"] == null ? 0 : animal["longitude"].ToObject<double>();
                 dog.Image = animal["image"] == null ? null : animal["image"].ToObject<byte[]>();
 
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(dog.UserId.ToString());
+
+                File.WriteAllText(@"C:\Users\Lajos\Desktop\debug.txt", sb.ToString());
                 WriteToDatabase.WriteFoundAnimalToDatabase(dog);
 
                 var response = Request.CreateResponse<Animal>(System.Net.HttpStatusCode.Created, dog);
@@ -85,7 +97,6 @@ namespace FindogWeb.Controllers
 
         }
 
-
         [Route("savewanted")]
         [HttpPost]
         public HttpResponseMessage SaveWantedAnimals(Object model)
@@ -97,7 +108,7 @@ namespace FindogWeb.Controllers
 
                 Animal dog = new Animal();
                 //dog.AnimalIdToObjectId(animal["animalId"].ToObject<ObjectId>);
-                dog.UserId = new Guid(animal["userId"].ToString());
+                dog.UserId = animal["userId"].ToString();
                 dog.Breed = animal["breed"].ToString();
                 dog.Description = animal["description"].ToString();
                 dog.Date = animal["date"] == null ? DateTime.Now : animal["date"].ToObject<DateTime>();
@@ -130,7 +141,7 @@ namespace FindogWeb.Controllers
         // GET: Animal
         [Route("deletefoundanimal/{id}")]
         [HttpGet]
-        public HttpResponseMessage DeleteAnimal(string id)
+        public HttpResponseMessage DeleteFoundAnimal(string id)
         {
             try
             {
@@ -144,6 +155,22 @@ namespace FindogWeb.Controllers
             }
         }
 
+        // GET: Animal
+        [Route("deletewantedanimal/{id}")]
+        [HttpGet]
+        public HttpResponseMessage DeleteWantedAnimal(string id)
+        {
+            try
+            {
+                var response = Request.CreateResponse<string>(System.Net.HttpStatusCode.Accepted, id);
+                DeleteFromDatabase.DeleteWantedAnimal(id);
+                return response;
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, id);
+            }
+        }
 
         // GET: Animal
         [Route("updatefoundanimal/{id}")]
@@ -157,7 +184,7 @@ namespace FindogWeb.Controllers
 
                 Animal dog = new Animal();
                 dog.AnimalIdToObjectId(id);
-                dog.UserId = new Guid(animal["userId"].ToString());
+                dog.UserId = animal["userId"].ToString();
                 dog.Breed = animal["breed"].ToString();
                 dog.Description = animal["description"].ToString();
                 dog.Date = animal["date"] == null ? DateTime.Now : animal["date"].ToObject<DateTime>();

@@ -32,17 +32,16 @@ namespace FindogMobile
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.DogDescription);
-            
+
             Intent intent = Intent;
             Bundle bundle = intent.Extras.GetBundle("bundle");
             animal = new Animal();
-            double lat = bundle.GetDouble("latitude");
-            double lng = bundle.GetDouble("longitude");
+            animal.UserId = bundle.GetString("userId");
             animal.Image = bundle.GetByteArray("image");
             animal.Breed = bundle.GetString("breed");
             animal.Description = bundle.GetString("description");
-            animal.Latitude = lat;
-            animal.Longitude = lng;
+            animal.Latitude = bundle.GetDouble("latitude");
+            animal.Longitude = bundle.GetDouble("longitude");
 
 
             var adapter = new FindogTabsReadOnlyAdapter(this, SupportFragmentManager, animal);

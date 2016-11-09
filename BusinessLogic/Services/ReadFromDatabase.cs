@@ -31,6 +31,21 @@ namespace BusinessLogic.Services
             });
         }
 
+        public static List<User> ReadUsersFromDatabaseById(string id)
+        {
+            return Database.Instance.FindUsers((e) =>
+            {
+                if (string.Equals(e.Id.ToString(), id, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            });
+        }
+
         public static List<Animal> ReadAnimalFromDatabase()
         {
             return Database.Instance.FindFoundAnimals((e) => { return true; });
@@ -40,7 +55,22 @@ namespace BusinessLogic.Services
         {
             return Database.Instance.FindFoundAnimals((e) =>
             {
-                if (e.UserId.Equals(new Guid(userId)))
+                if (e.UserId.Equals(userId))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            });
+        }
+
+        public static List<Animal> ReadWantedAnimalFromDatabase(string userId)
+        {
+            return Database.Instance.FindWantedAnimals((e) =>
+            {
+                if (e.UserId.Equals(userId))
                 {
                     return true;
                 }

@@ -95,18 +95,23 @@
     <Compile Include="Adapters\DogAdapter.cs" />
     <Compile Include="Adapters\FindogTabsAdapter.cs" />
     <Compile Include="Adapters\FindogTabsReadOnlyAdapter.cs" />
+    <Compile Include="Adapters\FIndogTabsUpdateAdapter.cs" />
     <Compile Include="Adapters\MenuAdapter.cs" />
     <Compile Include="DogDescription.cs" />
     <Compile Include="FindDog.cs" />
     <Compile Include="FoundDog.cs" />
     <Compile Include="Fragments\CameraFragment.cs" />
+    <Compile Include="Fragments\CameraUpdateFragment.cs" />
     <Compile Include="Fragments\FindogDetailsFragment.cs" />
     <Compile Include="Fragments\FindogDetailsReadOnlyFragment.cs" />
+    <Compile Include="Fragments\FindogDetailsUpdateFragment.cs" />
     <Compile Include="Fragments\GpsFragment.cs" />
     <Compile Include="Fragments\MapFragment.cs" />
     <Compile Include="Fragments\MapFragmentReadOnly.cs" />
+    <Compile Include="Fragments\MapFragmentUpdate.cs" />
     <Compile Include="Fragments\PhotoFragment.cs" />
     <Compile Include="Fragments\SaveFragment.cs" />
+    <Compile Include="Fragments\UpdateFragment.cs" />
     <Compile Include="Helpers\BitmapHelpers.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="MainActivity.cs" />
@@ -114,10 +119,13 @@
     <Compile Include="Models\DogMenu.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\WebApiConnection.cs" />
+    <Compile Include="MyFoundDog.cs" />
+    <Compile Include="MyLostDog.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />
+    <Compile Include="UpdateFindog.cs" />
     <Compile Include="WantedDogs.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +182,24 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\MapReadOnlyFragmentPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\MyFounds.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\MyLosts.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\FindogDetailsUpdate.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\MapUpdateFragmentPage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CameraUpdatePage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UpdateDog.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -269,6 +295,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Longitude.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\ItemSearch.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets')" />

@@ -20,20 +20,22 @@ using BusinessLogic.Models;
 namespace FindogMobile
 {
     [Activity(Label = "FoundDog")]
-    public class FoundDog : Activity
+    public class FoundDog : Android.Support.V7.App.AppCompatActivity
     {
-        ListView wantedDogsListView;
+        ListView foundDogsListView;
+        DogAdapter adapter;
+        Android.Support.V7.Widget.SearchView searchView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.FoundDogs);
-
+                       
             var result = FetchAnimalsAsync();
-
-            wantedDogsListView = FindViewById<ListView>(Resource.Id.FoundDogList);
-            wantedDogsListView.Adapter = new DogAdapter(this, result);
-            wantedDogsListView.ItemClick += (s, e) =>
+            adapter = new DogAdapter(this, result);
+            foundDogsListView = FindViewById<ListView>(Resource.Id.FoundDogList);
+            foundDogsListView.Adapter = adapter;
+            foundDogsListView.ItemClick += (s, e) =>
             {
                 var listView = s as ListView;
                 var t = result[e.Position];
@@ -50,7 +52,71 @@ namespace FindogMobile
                 intent.PutExtra("bundle", bundle);
                 StartActivity(intent);
             };
+
+
+            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.dogtoolbar);
+
+            toolbar.InflateMenu(Resource.Menu.ItemSearch);
+            toolbar.MenuItemClick += (object sender, Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs e) =>
+            {
+
+            };
+
+            var search = toolbar.Menu.FindItem(Resource.Id.search);
+            searchView = search.ActionView.JavaCast<Android.Support.V7.Widget.SearchView>();
+            searchView.QueryHint = "Search";
+            searchView.QueryTextChange += (s, e) => { adapter.Filter(e.NewText); };
+            searchView.QueryTextSubmit += (s, e) =>
+            {
+                Toast.MakeText(this, "Searched for: " + e.Query, ToastLength.Short).Show();
+                e.Handled = true;
+            };
         }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.ItemSearch, menu);
+
+            var item = menu.FindItem(Resource.Id.dogtoolbar);
+
+            var searchView = Android.Support.V4.View.MenuItemCompat.GetActionView(item);
+            var _searchView = searchView.JavaCast<SearchView>();
+
+            _searchView.QueryTextChange += (s, e) => adapter.Filter(e.NewText);
+
+            _searchView.QueryTextSubmit += (s, e) =>
+            {
+                // Handle enter/search button on keyboard here
+                Toast.MakeText(this, "Searched for: " + e.Query, ToastLength.Short).Show();
+                e.Handled = true;
+            };
+
+            // Android.Support.V4.View.MenuItemCompat.SetOnActionExpandListener(item, new SearchViewExpandListener(adapter));
+
+            return true;
+        }
+
+        //private class SearchViewExpandListener
+        //    : Java.Lang.Object, Android.Support.V4.View.MenuItemCompat.IOnActionExpandListener
+        //{
+        //    private readonly IFilterable _adapter;
+
+        //    public SearchViewExpandListener(IFilterable adapter)
+        //    {
+        //        _adapter = adapter;
+        //    }
+
+        //    public bool OnMenuItemActionCollapse(IMenuItem item)
+        //    {
+        //        _adapter.Filter.InvokeFilter("");
+        //        return true;
+        //    }
+
+        //    public bool OnMenuItemActionExpand(IMenuItem item)
+        //    {
+        //        return true;
+        //    }
+        //}
 
         private List<Animal> FetchAnimalsAsync()
         {
@@ -81,13 +147,13 @@ namespace FindogMobile
                 foreach (var animal in animals)
                 {
                     Animal dog = new Animal();
-                    dog.UserId =new Guid( animal["userId"].ToString());
+                    dog.UserId = animal["userId"].ToString();
                     dog.Breed = animal["breed"].ToString();
                     dog.Description = animal["description"].ToString();
                     dog.Date = animal["date"].ToObject<DateTime>();
                     dog.Image = animal["image"].ToObject<byte[]>();
-                    dog.Latitude = animal["latitude"].ToObject<int>();
-                    dog.Longitude = animal["longitude"].ToObject<int>();
+                    dog.Latitude = animal["latitude"].ToObject<double>();
+                    dog.Longitude = animal["longitude"].ToObject<double>();
                     dogs.Add(dog);
                 }
             }

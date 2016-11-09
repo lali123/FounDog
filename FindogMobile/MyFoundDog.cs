@@ -9,38 +9,44 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using FindogMobile.Adapters;
-using FindogMobile.Models;
-using System.Net;
-using Newtonsoft.Json.Linq;
-using System.IO;
 using BusinessLogic.Models;
+using System.Net;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using FindogMobile.Models;
+using FindogMobile.Adapters;
 
 namespace FindogMobile
 {
-    [Activity(Label = "WantedDogs")]
-    public class WantedDogs : Activity
+    [Activity(Label = "MyFoundDog")]
+    public class MyFoundDog : Activity
     {
-        DogAdapter adapter;
-        Android.Support.V7.Widget.SearchView searchView;
-        ListView wantedDogsListView;
+        ListView uploadList;
+        List<Animal> result;
+        public Animal SelectedAnimal { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.WantedDogs);
+            SetContentView(Resource.Layout.MyFounds);
+            // Create your application here
 
-            var result = FetchAnimalsAsync();
-            adapter = new DogAdapter(this, result);
-            wantedDogsListView = FindViewById<ListView>(Resource.Id.WantedDogsList);
-            wantedDogsListView.Adapter = adapter;
-            wantedDogsListView.ItemClick += (s, e) =>
+            result = FetchAnimalsAsync();
+
+            var adapter = new DogAdapter(this, result);
+            uploadList = FindViewById<ListView>(Resource.Id.MyFoundList);
+            uploadList.Adapter = adapter;
+            uploadList.ItemClick += (s, e) =>
             {
                 var listView = s as ListView;
                 var t = result[e.Position];
                 Toast.MakeText(this, t.Breed, ToastLength.Short).Show();
-                Intent intent = new Intent(this, typeof(DogDescription));
+                App.Tag = "found";
+                SelectedAnimal = t;
+                Intent intent = new Intent(this, typeof(UpdateFindog));
                 Bundle bundle = new Bundle();
+                
+                bundle.PutString("AnimalId", t.AnimalIdToString());
                 bundle.PutString("userId", t.UserId.ToString());
                 bundle.PutString("breed", t.Breed);
                 bundle.PutDouble("latitude", t.Latitude);
@@ -52,24 +58,54 @@ namespace FindogMobile
                 StartActivity(intent);
             };
 
-
-            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.dogwantedtoolbar);
-
-            toolbar.InflateMenu(Resource.Menu.ItemSearch);
-            toolbar.MenuItemClick += (object sender, Android.Support.V7.Widget.Toolbar.MenuItemClickEventArgs e) =>
+            uploadList.ItemLongClick += (s, e) =>
             {
+                var listView = s as ListView;
+                var animal = result[e.Position];
+                PopupMenu menu = new PopupMenu(this, uploadList);
+                menu.Inflate(Resource.Menu.PopupMenu);
+                menu.MenuItemClick += (se, ev) =>
+                {
+                    RemoveAnimal(animal.AnimalIdToString());
+                    result.Remove(animal);
 
+                    adapter.NotifyDataSetChanged();
+                    Toast.MakeText(this, "Deleted", ToastLength.Short).Show();
+                };
+                menu.Show();
             };
+        }
 
-            var search = toolbar.Menu.FindItem(Resource.Id.search);
-            searchView = search.ActionView.JavaCast<Android.Support.V7.Widget.SearchView>();
-            searchView.QueryHint = "Search";
-            searchView.QueryTextChange += (s, e) => { adapter.Filter(e.NewText); };
-            searchView.QueryTextSubmit += (s, e) =>
+
+        private void RemoveAnimal(string id)
+        {
+            try
             {
-                Toast.MakeText(this, "Searched for: " + e.Query, ToastLength.Short).Show();
-                e.Handled = true;
-            };
+                string responseFromServer = String.Empty;
+                // Create a request for the URL. 		
+
+
+                WebRequest request = WebRequest.Create(WebApiConnection.Instance().ConnectionString + @"animal/deletefoundanimal/" + id);
+                // If required by the server, set the credentials.
+                request.Credentials = CredentialCache.DefaultCredentials;
+                // Get the response.
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    // Get the stream containing content returned by the server.
+                    using (Stream dataStream = response.GetResponseStream())
+                    {
+                        // Read the content.
+                        using (StreamReader reader = new StreamReader(dataStream))
+                        {
+                            responseFromServer = reader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                Toast.MakeText(this, "Cannot connect to the server", ToastLength.Short).Show();
+            }
         }
 
         private List<Animal> FetchAnimalsAsync()
@@ -79,7 +115,8 @@ namespace FindogMobile
             {
                 string responseFromServer = String.Empty;
                 // Create a request for the URL. 		
-                WebRequest request = WebRequest.Create(WebApiConnection.Instance().ConnectionString + @"animal/wantedanimals");
+                var user = MobileUser.Instance().User;
+                WebRequest request = WebRequest.Create(WebApiConnection.Instance().ConnectionString + @"animal/foundanimals/" + MobileUser.Instance().User.Id);
                 // If required by the server, set the credentials.
                 request.Credentials = CredentialCache.DefaultCredentials;
                 // Get the response.
@@ -96,12 +133,12 @@ namespace FindogMobile
                     }
                 }
 
-
                 JArray animals = JArray.Parse(responseFromServer);
 
                 foreach (var animal in animals)
                 {
                     Animal dog = new Animal();
+                    dog.AnimalIdToObjectId(animal["animalId"].ToString());
                     dog.UserId = animal["userId"].ToString();
                     dog.Breed = animal["breed"].ToString();
                     dog.Description = animal["description"].ToString();
@@ -116,6 +153,7 @@ namespace FindogMobile
             {
                 Toast.MakeText(this, "Cannot connect to the server", ToastLength.Short).Show();
             }
+
 
             return dogs;
         }
