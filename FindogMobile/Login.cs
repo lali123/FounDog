@@ -31,6 +31,8 @@ namespace FindogMobile
         EditText txtPhoneNumber;
         Button btnRegister;
         Button btnLogin;
+        User user;
+        String password;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -61,6 +63,22 @@ namespace FindogMobile
 
                 btnRegister.Click += RegisterUserClick;
                 btnLogin.Click += LoginClick;
+
+                ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
+
+                user = new User()
+                {
+                    // Date = prefs.GetString("Date", DateTime.Now.ToString()),
+                    EmailAddress = prefs.GetString("Email", ""),
+                    Name = prefs.GetString("Name", ""),
+                    PhoneNumber = prefs.GetString("Phone", ""),
+                    Id = prefs.GetString("Id", "")
+                };
+                password = prefs.GetString("Password", "");
+                txtName.Text = user.Name;
+                txtEmail.Text = user.EmailAddress;
+                txtPhoneNumber.Text = user.PhoneNumber;
+                txtPassword.Text = password;
             }
         }
 
@@ -151,9 +169,16 @@ namespace FindogMobile
                 && !string.IsNullOrEmpty(txtPhoneNumber.Text) 
                 && !string.IsNullOrEmpty(txtPassword.Text))
             {
-                Toast.MakeText(this, "Login", ToastLength.Short).Show();
-                Intent intentMain = new Intent(this, typeof(MainActivity));
-                StartActivity(intentMain);
+                if (user.Name.Equals(txtName.Text) && password.Equals(txtPassword.Text))
+                {
+                    Toast.MakeText(this, "Login", ToastLength.Short).Show();
+                    Intent intentMain = new Intent(this, typeof(MainActivity));
+                    StartActivity(intentMain);
+                }
+                else
+                {
+                    Toast.MakeText(this, "Name or password not matched", ToastLength.Short).Show();
+                }
             }
         }
 
