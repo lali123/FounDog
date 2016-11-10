@@ -32,16 +32,15 @@ namespace FindogMobile
         public string Description { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public byte[] Image { get; set; }
+        public Animal SelectedAnimal { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.FindDog);
 
-            Latitude = 47.5316049;
-            Longitude = 21.6273123;
-            Breed = "";
-            Description = "";
+            
 
             Intent intent = Intent;
             Bundle bundle = intent.Extras.GetBundle("bundle");
@@ -55,6 +54,12 @@ namespace FindogMobile
             animal.Latitude = bundle.GetDouble("latitude");
             animal.Longitude = bundle.GetDouble("longitude");
 
+            SelectedAnimal = animal;
+            Latitude = animal.Latitude;
+            Longitude = animal.Longitude;
+            Breed = animal.Breed;
+            Description = animal.Description;
+            Image = animal.Image;
 
             var adapter = new FIndogTabsUpdateAdapter(this, SupportFragmentManager, animal);
             findogViewPager = FindViewById<ViewPager>(Resource.Id.pager);

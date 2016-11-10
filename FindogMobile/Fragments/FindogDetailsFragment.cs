@@ -1,16 +1,8 @@
-using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using FindogMobile;
 using FindogMobile.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FindogMobile.Fragments
 {
@@ -51,6 +43,9 @@ namespace FindogMobile.Fragments
             longitudeTextView = view.FindViewById<TextView>(Resource.Id.longitudeReadOnly);
             latitudeTextView.Text = 47.5316049.ToString();
             longitudeTextView.Text = 21.6273123.ToString();
+
+
+
             descriptionEditView.TextChanged += (s, e) =>
             {
                 if (Activity is FindDog)

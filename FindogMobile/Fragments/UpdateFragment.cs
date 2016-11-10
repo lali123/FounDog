@@ -1,23 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
+using Android.Graphics;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Newtonsoft.Json;
 using BusinessLogic.Models;
-using FindogMobile.Models;
-using Newtonsoft.Json.Serialization;
-using System.Net.Http;
-using Android.Graphics;
 using FindogMobile.Helpers;
+using FindogMobile.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.IO;
+using System.Net.Http;
+using System.Text;
 
 namespace FindogMobile.Fragments
 {
@@ -70,16 +64,19 @@ namespace FindogMobile.Fragments
                 Latitude = (Activity as UpdateFindog).Latitude,
                 Longitude = (Activity as UpdateFindog).Longitude,
                 Breed = (Activity as UpdateFindog).Breed,
-                Image = byteArray,
+                Image = (Activity as UpdateFindog).Image,
             };
+            animal.AnimalIdToObjectId((Activity as UpdateFindog).SelectedAnimal.AnimalIdToString());
+
+
             string postString = "";
             if (App.Tag.Equals("found"))
             {
-                postString = "animal/updatefoundanimal/";
+                postString = "animal/updatefoundanimal/" + animal.AnimalIdToString();
             }
             else if (App.Tag.Equals("lost"))
             {
-                postString = "animal/wantedanimals/";
+                postString = "animal/wantedanimals/" + animal.AnimalIdToString();
             }
 
             try

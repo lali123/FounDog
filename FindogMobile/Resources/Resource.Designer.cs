@@ -2489,7 +2489,7 @@ namespace FindogMobile
 			public const int saveDogFragment = 2131296395;
 			
 			// aapt resource value: 0x7f090098
-			public const int saveDogFragmentUpdateUpdate = 2131296408;
+			public const int saveDogFragmentUpdate = 2131296408;
 			
 			// aapt resource value: 0x7f090021
 			public const int screen = 2131296289;

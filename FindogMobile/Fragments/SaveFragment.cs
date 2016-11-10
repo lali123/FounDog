@@ -1,28 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
+using Android.Graphics;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using System.Json;
-using System.Threading.Tasks;
-using System.Net;
-using System.IO;
-using System.Net.Http;
-using Newtonsoft.Json;
 using BusinessLogic.Models;
-using System.Net.Http.Headers;
-using Android.Graphics;
-using Java.IO;
-using Newtonsoft.Json.Serialization;
-using Android.Graphics.Drawables;
 using FindogMobile.Helpers;
 using FindogMobile.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
+using System.IO;
+using System.Net.Http;
+using System.Text;
 
 namespace FindogMobile.Fragments
 {

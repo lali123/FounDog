@@ -69,7 +69,7 @@
         </TableLayout>
         <fragment
             android:name="FindogMobile.Fragments.UpdateFragment"
-            android:id="@+id/saveDogFragmentUpdateUpdate"
+            android:id="@+id/saveDogFragmentUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

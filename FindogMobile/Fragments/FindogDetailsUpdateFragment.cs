@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+using Android.Graphics;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using FindogMobile.Helpers;
 using BusinessLogic.Models;
+using FindogMobile.Helpers;
+using System;
 
 namespace FindogMobile.Fragments
 {
@@ -56,20 +49,22 @@ namespace FindogMobile.Fragments
             longitudeTextView.Text = mDog.Longitude.ToString();
             descriptionEditView.Text = mDog.Description;
             breedEditView.Text = mDog.Breed;
+            Bitmap bm = BitmapFactory.DecodeByteArray(mDog.Image, 0, mDog.Image.Length);
+            dogImageView.SetImageBitmap(bm);
 
             descriptionEditView.TextChanged += (s, e) =>
             {
-                if (Activity is FindDog)
+                if (Activity is UpdateFindog)
                 {
-                    (Activity as FindDog).Description = descriptionEditView.Text;
+                    (Activity as UpdateFindog).Description = descriptionEditView.Text;
                 }
             };
 
             breedEditView.TextChanged += (s, e) =>
             {
-                if (Activity is FindDog)
+                if (Activity is UpdateFindog)
                 {
-                    (Activity as FindDog).Breed = breedEditView.Text;
+                    (Activity as UpdateFindog).Breed = breedEditView.Text;
                 }
             };
             return view;

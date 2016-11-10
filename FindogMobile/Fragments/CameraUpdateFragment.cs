@@ -16,6 +16,7 @@ using FindogMobile.Helpers;
 using Java.IO;
 using BusinessLogic.Models;
 using Android.Graphics;
+using System.IO;
 
 namespace FindogMobile.Fragments
 {
@@ -77,7 +78,7 @@ namespace FindogMobile.Fragments
 
         private void CreateDirectoryForPictures()
         {
-            App._dir = new File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures), "Findog");
+            App._dir = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures), "Findog");
             if (!App._dir.Exists())
             {
                 App._dir.Mkdirs();
@@ -109,7 +110,16 @@ namespace FindogMobile.Fragments
             if (App.bitmap != null)
             {
                 takePictureImageView.SetImageBitmap(App.bitmap);
+                var bmp = App.bitmap;
+                using (var stream = new MemoryStream())
+                {
+                    bmp.Compress(Bitmap.CompressFormat.Png, 0, stream);
+
+                    (Activity as UpdateFindog).Image = stream.ToArray();
+                }
+
                 App.bitmap = null;
+
             }
 
             // Dispose of the Java side bitmap.
