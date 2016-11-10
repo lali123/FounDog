@@ -54,6 +54,10 @@ namespace FindogMobile
                           Intent intentWanted = new Intent(this, typeof(WantedDogs));
                           StartActivity(intentWanted);
                           break;
+                      case "Dogs on map":
+                          Intent intentMap = new Intent(this, typeof(DogsOnMap));
+                          StartActivity(intentMap);
+                          break;
                       case "Exit":
                           Finish();
                           break;
@@ -74,6 +78,7 @@ namespace FindogMobile
                 new DogMenu { IsGroupHeader = false, Title="Lost my dog", Icon=Resource.Drawable.Search},
                 new DogMenu { IsGroupHeader = false, Title="Found dogs", Icon=Resource.Drawable.DogHouse},
                 new DogMenu { IsGroupHeader = false, Title="Wanted dogs", Icon=Resource.Drawable.DogLeash},
+                new DogMenu { IsGroupHeader = false, Title="Dogs on map", Icon=Resource.Drawable.MapMarker},
                 new DogMenu { IsGroupHeader = false, Title="Exit", Icon=Resource.Drawable.Cancel},
             };
         }

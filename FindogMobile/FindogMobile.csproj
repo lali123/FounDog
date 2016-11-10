@@ -98,6 +98,7 @@
     <Compile Include="Adapters\FIndogTabsUpdateAdapter.cs" />
     <Compile Include="Adapters\MenuAdapter.cs" />
     <Compile Include="DogDescription.cs" />
+    <Compile Include="DogsOnMap.cs" />
     <Compile Include="FindDog.cs" />
     <Compile Include="FoundDog.cs" />
     <Compile Include="Fragments\CameraFragment.cs" />
@@ -202,6 +203,9 @@
     <AndroidResource Include="Resources\layout\UpdateDog.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\MapLayout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -298,6 +302,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\menu\ItemSearch.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\MapMarker.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets')" />
