@@ -17,11 +17,13 @@ using System.IO;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using FindogMobile.Models;
+using static Android.Gms.Maps.GoogleMap;
+using Android.Graphics;
 
 namespace FindogMobile
 {
     [Activity(Label = "DogsOnMap")]
-    public class DogsOnMap : Activity, IOnMapReadyCallback
+    public class DogsOnMap : Activity, IOnMapReadyCallback, IInfoWindowAdapter
     {
         GoogleMap map;
         List<Animal> Dogs;
@@ -35,7 +37,10 @@ namespace FindogMobile
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.SetPosition(new LatLng(dogLocation.Latitude, dogLocation.Longitude));
                 markerOptions.SetTitle("Found dog");
-                googleMap.AddMarker(markerOptions);
+                markerOptions.SetSnippet(dog.AnimalIdToString());
+
+                Marker marker = googleMap.AddMarker(markerOptions);
+                
             }
             
             CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
@@ -46,6 +51,8 @@ namespace FindogMobile
 
             googleMap.AnimateCamera(cameraUpdate);
             googleMap.MyLocationEnabled = true;
+            googleMap.SetInfoWindowAdapter(this);
+
             map = googleMap;
         }
 
@@ -108,6 +115,7 @@ namespace FindogMobile
                 foreach (var animal in animals)
                 {
                     Animal dog = new Animal();
+                    dog.AnimalIdToObjectId(animal["animalId"].ToString());
                     dog.UserId = animal["userId"].ToString();
                     dog.Breed = animal["breed"].ToString();
                     dog.Description = animal["description"].ToString();
@@ -125,6 +133,28 @@ namespace FindogMobile
 
 
             return dogs;
+        }
+
+        public View GetInfoContents(Marker marker)
+        {
+            return null;
+        }
+
+        public View GetInfoWindow(Marker marker)
+        {
+            View view = LayoutInflater.Inflate(Resource.Layout.MarkerInfo, null, false);
+            var animal = Dogs.Where(d => d.AnimalIdToString().Equals(marker.Snippet)).FirstOrDefault();
+            TextView breed = view.FindViewById<TextView>(Resource.Id.markerBreed);
+            TextView description = view.FindViewById<TextView>(Resource.Id.markerDescription);
+            ImageView image = view.FindViewById<ImageView>(Resource.Id.markerImage);
+
+            breed.Text = animal.Breed;
+            description.Text = animal.Description;
+
+            Bitmap bm = BitmapFactory.DecodeByteArray(animal.Image, 0, animal.Image.Length);
+            image.SetImageBitmap(bm);
+
+            return view;
         }
     }
 }
