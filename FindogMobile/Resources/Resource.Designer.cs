@@ -2086,26 +2086,26 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090085
 			public const int FindogDetailFragment = 2131296389;
 			
-			// aapt resource value: 0x7f090092
-			public const int FindogDetailFragmentUpdate = 2131296402;
+			// aapt resource value: 0x7f090096
+			public const int FindogDetailFragmentUpdate = 2131296406;
 			
-			// aapt resource value: 0x7f09009a
-			public const int FoundDogList = 2131296410;
+			// aapt resource value: 0x7f09009e
+			public const int FoundDogList = 2131296414;
 			
 			// aapt resource value: 0x7f090082
 			public const int Image = 2131296386;
 			
-			// aapt resource value: 0x7f0900a8
-			public const int MainMenuList = 2131296424;
+			// aapt resource value: 0x7f0900ac
+			public const int MainMenuList = 2131296428;
 			
-			// aapt resource value: 0x7f0900b1
-			public const int MyFoundList = 2131296433;
+			// aapt resource value: 0x7f0900b5
+			public const int MyFoundList = 2131296437;
 			
-			// aapt resource value: 0x7f0900b2
-			public const int MyLostsList = 2131296434;
+			// aapt resource value: 0x7f0900b6
+			public const int MyLostsList = 2131296438;
 			
-			// aapt resource value: 0x7f0900c1
-			public const int MyUploads = 2131296449;
+			// aapt resource value: 0x7f0900c5
+			public const int MyUploads = 2131296453;
 			
 			// aapt resource value: 0x7f09007f
 			public const int Text = 2131296383;
@@ -2116,11 +2116,11 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090081
 			public const int Text2 = 2131296385;
 			
-			// aapt resource value: 0x7f0900c5
-			public const int WantedDogsList = 2131296453;
+			// aapt resource value: 0x7f0900c9
+			public const int WantedDogsList = 2131296457;
 			
-			// aapt resource value: 0x7f0900b3
-			public const int action0 = 2131296435;
+			// aapt resource value: 0x7f0900b7
+			public const int action0 = 2131296439;
 			
 			// aapt resource value: 0x7f090065
 			public const int action_bar = 2131296357;
@@ -2146,8 +2146,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090066
 			public const int action_context_bar = 2131296358;
 			
-			// aapt resource value: 0x7f0900b7
-			public const int action_divider = 2131296439;
+			// aapt resource value: 0x7f0900bb
+			public const int action_divider = 2131296443;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -2191,29 +2191,38 @@ namespace FindogMobile
 			// aapt resource value: 0x7f09008d
 			public const int breedReadOnly = 2131296397;
 			
-			// aapt resource value: 0x7f09009d
-			public const int btnGPS = 2131296413;
+			// aapt resource value: 0x7f090092
+			public const int btnCallPhone = 2131296402;
 			
-			// aapt resource value: 0x7f09009e
-			public const int btnPointOnMap = 2131296414;
+			// aapt resource value: 0x7f0900a1
+			public const int btnGPS = 2131296417;
 			
-			// aapt resource value: 0x7f0900c2
-			public const int btnSaveDog = 2131296450;
+			// aapt resource value: 0x7f0900a2
+			public const int btnPointOnMap = 2131296418;
 			
-			// aapt resource value: 0x7f0900c3
-			public const int btnUpdateDog = 2131296451;
+			// aapt resource value: 0x7f0900c6
+			public const int btnSaveDog = 2131296454;
 			
-			// aapt resource value: 0x7f0900a6
-			public const int btn_login = 2131296422;
+			// aapt resource value: 0x7f0900c7
+			public const int btnUpdateDog = 2131296455;
 			
-			// aapt resource value: 0x7f0900a5
-			public const int btn_register = 2131296421;
+			// aapt resource value: 0x7f090095
+			public const int btnWriteEmail = 2131296405;
+			
+			// aapt resource value: 0x7f0900aa
+			public const int btn_login = 2131296426;
+			
+			// aapt resource value: 0x7f0900a9
+			public const int btn_register = 2131296425;
 			
 			// aapt resource value: 0x7f09004f
 			public const int buttonPanel = 2131296335;
 			
-			// aapt resource value: 0x7f0900b4
-			public const int cancel_action = 2131296436;
+			// aapt resource value: 0x7f090090
+			public const int callNumber = 2131296400;
+			
+			// aapt resource value: 0x7f0900b8
+			public const int cancel_action = 2131296440;
 			
 			// aapt resource value: 0x7f090036
 			public const int center = 2131296310;
@@ -2227,8 +2236,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f09005d
 			public const int checkbox = 2131296349;
 			
-			// aapt resource value: 0x7f0900ba
-			public const int chronometer = 2131296442;
+			// aapt resource value: 0x7f0900be
+			public const int chronometer = 2131296446;
 			
 			// aapt resource value: 0x7f09003e
 			public const int clip_horizontal = 2131296318;
@@ -2275,11 +2284,11 @@ namespace FindogMobile
 			// aapt resource value: 0x7f09001a
 			public const int disableHome = 2131296282;
 			
-			// aapt resource value: 0x7f090099
-			public const int dogtoolbar = 2131296409;
+			// aapt resource value: 0x7f09009d
+			public const int dogtoolbar = 2131296413;
 			
-			// aapt resource value: 0x7f0900c4
-			public const int dogwantedtoolbar = 2131296452;
+			// aapt resource value: 0x7f0900c8
+			public const int dogwantedtoolbar = 2131296456;
 			
 			// aapt resource value: 0x7f090067
 			public const int edit_query = 2131296359;
@@ -2287,8 +2296,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090026
 			public const int end = 2131296294;
 			
-			// aapt resource value: 0x7f0900bf
-			public const int end_padder = 2131296447;
+			// aapt resource value: 0x7f0900c3
+			public const int end_padder = 2131296451;
 			
 			// aapt resource value: 0x7f09002e
 			public const int enterAlways = 2131296302;
@@ -2299,14 +2308,14 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090089
 			public const int etBreed = 2131296393;
 			
-			// aapt resource value: 0x7f090096
-			public const int etBreedUpdate = 2131296406;
+			// aapt resource value: 0x7f09009a
+			public const int etBreedUpdate = 2131296410;
 			
 			// aapt resource value: 0x7f09008a
 			public const int etDescription = 2131296394;
 			
-			// aapt resource value: 0x7f090097
-			public const int etDescriptionUpdate = 2131296407;
+			// aapt resource value: 0x7f09009b
+			public const int etDescriptionUpdate = 2131296411;
 			
 			// aapt resource value: 0x7f090030
 			public const int exitUntilCollapsed = 2131296304;
@@ -2329,8 +2338,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090043
 			public const int @fixed = 2131296323;
 			
-			// aapt resource value: 0x7f09009f
-			public const int headerIcon = 2131296415;
+			// aapt resource value: 0x7f0900a3
+			public const int headerIcon = 2131296419;
 			
 			// aapt resource value: 0x7f090005
 			public const int home = 2131296261;
@@ -2356,8 +2365,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090086
 			public const int imageViewDogPicture = 2131296390;
 			
-			// aapt resource value: 0x7f090093
-			public const int imageViewDogPictureUpdate = 2131296403;
+			// aapt resource value: 0x7f090097
+			public const int imageViewDogPictureUpdate = 2131296407;
 			
 			// aapt resource value: 0x7f090074
 			public const int imgTakePicture = 2131296372;
@@ -2365,35 +2374,35 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090075
 			public const int imgTakePictureUpdate = 2131296373;
 			
-			// aapt resource value: 0x7f0900be
-			public const int info = 2131296446;
+			// aapt resource value: 0x7f0900c2
+			public const int info = 2131296450;
 			
-			// aapt resource value: 0x7f0900a2
-			public const int input_email = 2131296418;
+			// aapt resource value: 0x7f0900a6
+			public const int input_email = 2131296422;
 			
-			// aapt resource value: 0x7f0900a1
-			public const int input_name = 2131296417;
+			// aapt resource value: 0x7f0900a5
+			public const int input_name = 2131296421;
 			
-			// aapt resource value: 0x7f0900a4
-			public const int input_password = 2131296420;
+			// aapt resource value: 0x7f0900a8
+			public const int input_password = 2131296424;
 			
-			// aapt resource value: 0x7f0900a3
-			public const int input_phone = 2131296419;
+			// aapt resource value: 0x7f0900a7
+			public const int input_phone = 2131296423;
 			
 			// aapt resource value: 0x7f090000
 			public const int item_touch_helper_previous_elevation = 2131296256;
 			
-			// aapt resource value: 0x7f0900af
-			public const int ivIcon = 2131296431;
+			// aapt resource value: 0x7f0900b3
+			public const int ivIcon = 2131296435;
 			
-			// aapt resource value: 0x7f0900c0
-			public const int ivPhotoReadOnly = 2131296448;
+			// aapt resource value: 0x7f0900c4
+			public const int ivPhotoReadOnly = 2131296452;
 			
 			// aapt resource value: 0x7f090087
 			public const int latitudeReadOnly = 2131296391;
 			
-			// aapt resource value: 0x7f090094
-			public const int latitudeReadOnlyUpdate = 2131296404;
+			// aapt resource value: 0x7f090098
+			public const int latitudeReadOnlyUpdate = 2131296408;
 			
 			// aapt resource value: 0x7f09003a
 			public const int left = 2131296314;
@@ -2401,14 +2410,14 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090017
 			public const int light = 2131296279;
 			
-			// aapt resource value: 0x7f0900b8
-			public const int line1 = 2131296440;
-			
 			// aapt resource value: 0x7f0900bc
-			public const int line3 = 2131296444;
+			public const int line1 = 2131296444;
 			
-			// aapt resource value: 0x7f0900a7
-			public const int link_login = 2131296423;
+			// aapt resource value: 0x7f0900c0
+			public const int line3 = 2131296448;
+			
+			// aapt resource value: 0x7f0900ab
+			public const int link_login = 2131296427;
 			
 			// aapt resource value: 0x7f090018
 			public const int listMode = 2131296280;
@@ -2419,29 +2428,29 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090088
 			public const int longitudeReadOnly = 2131296392;
 			
-			// aapt resource value: 0x7f090095
-			public const int longitudeReadOnlyUpdate = 2131296405;
-			
-			// aapt resource value: 0x7f0900a9
-			public const int map = 2131296425;
-			
-			// aapt resource value: 0x7f0900aa
-			public const int mapUpdate = 2131296426;
+			// aapt resource value: 0x7f090099
+			public const int longitudeReadOnlyUpdate = 2131296409;
 			
 			// aapt resource value: 0x7f0900ad
-			public const int markerBreed = 2131296429;
+			public const int map = 2131296429;
 			
 			// aapt resource value: 0x7f0900ae
-			public const int markerDescription = 2131296430;
+			public const int mapUpdate = 2131296430;
 			
-			// aapt resource value: 0x7f0900ab
-			public const int markerImage = 2131296427;
+			// aapt resource value: 0x7f0900b1
+			public const int markerBreed = 2131296433;
 			
-			// aapt resource value: 0x7f0900ac
-			public const int markerName = 2131296428;
+			// aapt resource value: 0x7f0900b2
+			public const int markerDescription = 2131296434;
 			
-			// aapt resource value: 0x7f0900b6
-			public const int media_actions = 2131296438;
+			// aapt resource value: 0x7f0900af
+			public const int markerImage = 2131296431;
+			
+			// aapt resource value: 0x7f0900b0
+			public const int markerName = 2131296432;
+			
+			// aapt resource value: 0x7f0900ba
+			public const int media_actions = 2131296442;
 			
 			// aapt resource value: 0x7f090027
 			public const int middle = 2131296295;
@@ -2491,8 +2500,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f09005f
 			public const int radio = 2131296351;
 			
-			// aapt resource value: 0x7f0900c7
-			public const int removeItem = 2131296455;
+			// aapt resource value: 0x7f0900cb
+			public const int removeItem = 2131296459;
 			
 			// aapt resource value: 0x7f09003b
 			public const int right = 2131296315;
@@ -2503,8 +2512,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f09008b
 			public const int saveDogFragment = 2131296395;
 			
-			// aapt resource value: 0x7f090098
-			public const int saveDogFragmentUpdate = 2131296408;
+			// aapt resource value: 0x7f09009c
+			public const int saveDogFragmentUpdate = 2131296412;
 			
 			// aapt resource value: 0x7f090021
 			public const int screen = 2131296289;
@@ -2524,8 +2533,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090044
 			public const int scrollable = 2131296324;
 			
-			// aapt resource value: 0x7f0900c6
-			public const int search = 2131296454;
+			// aapt resource value: 0x7f0900ca
+			public const int search = 2131296458;
 			
 			// aapt resource value: 0x7f090069
 			public const int search_badge = 2131296361;
@@ -2608,8 +2617,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f09003c
 			public const int start = 2131296316;
 			
-			// aapt resource value: 0x7f0900b5
-			public const int status_bar_latest_event_content = 2131296437;
+			// aapt resource value: 0x7f0900b9
+			public const int status_bar_latest_event_content = 2131296441;
 			
 			// aapt resource value: 0x7f090070
 			public const int submit_area = 2131296368;
@@ -2620,17 +2629,17 @@ namespace FindogMobile
 			// aapt resource value: 0x7f09000f
 			public const int terrain = 2131296271;
 			
-			// aapt resource value: 0x7f0900bd
-			public const int text = 2131296445;
+			// aapt resource value: 0x7f0900c1
+			public const int text = 2131296449;
 			
-			// aapt resource value: 0x7f0900bb
-			public const int text2 = 2131296443;
+			// aapt resource value: 0x7f0900bf
+			public const int text2 = 2131296447;
 			
 			// aapt resource value: 0x7f090058
 			public const int textSpacerNoButtons = 2131296344;
 			
-			// aapt resource value: 0x7f0900b9
-			public const int time = 2131296441;
+			// aapt resource value: 0x7f0900bd
+			public const int time = 2131296445;
 			
 			// aapt resource value: 0x7f09004e
 			public const int title = 2131296334;
@@ -2644,29 +2653,29 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090052
 			public const int topPanel = 2131296338;
 			
-			// aapt resource value: 0x7f09009b
-			public const int tvAddress = 2131296411;
-			
-			// aapt resource value: 0x7f09009c
-			public const int tvGps = 2131296412;
+			// aapt resource value: 0x7f09009f
+			public const int tvAddress = 2131296415;
 			
 			// aapt resource value: 0x7f0900a0
-			public const int tvHeader = 2131296416;
+			public const int tvGps = 2131296416;
 			
-			// aapt resource value: 0x7f0900b0
-			public const int tvTitle = 2131296432;
+			// aapt resource value: 0x7f0900a4
+			public const int tvHeader = 2131296420;
+			
+			// aapt resource value: 0x7f0900b4
+			public const int tvTitle = 2131296436;
 			
 			// aapt resource value: 0x7f090009
 			public const int up = 2131296265;
 			
-			// aapt resource value: 0x7f090091
-			public const int uploaderEmail = 2131296401;
+			// aapt resource value: 0x7f090094
+			public const int uploaderEmail = 2131296404;
 			
 			// aapt resource value: 0x7f09008f
 			public const int uploaderName = 2131296399;
 			
-			// aapt resource value: 0x7f090090
-			public const int uploaderPhone = 2131296400;
+			// aapt resource value: 0x7f090091
+			public const int uploaderPhone = 2131296401;
 			
 			// aapt resource value: 0x7f09001f
 			public const int useLogo = 2131296287;
@@ -2682,6 +2691,9 @@ namespace FindogMobile
 			
 			// aapt resource value: 0x7f09002d
 			public const int wrap_content = 2131296301;
+			
+			// aapt resource value: 0x7f090093
+			public const int writeEmail = 2131296403;
 			
 			static Id()
 			{

@@ -23,9 +23,10 @@ namespace FindogMobile.Fragments
     {
         const string ARG_PAGE = "ARG_PAGE";
         private int mPage;
-        public ImageView photoPreview;
+        public ImageView photoPreview, ivCallNumber, ivWriteEmail;
         public TextView tvBreed, tvDescription, tvUploaderName, tvUploaderPhone, tvUploaderEmail;
         static Animal mDog;
+        Button btnWriteEmail, btnCallNumber;
 
         public static FindogDetailsReadOnlyFragment NewInstance(int page, Animal dog)
         {
@@ -58,6 +59,10 @@ namespace FindogMobile.Fragments
             tvUploaderName = view.FindViewById<TextView>(Resource.Id.uploaderName);
             tvUploaderEmail = view.FindViewById<TextView>(Resource.Id.uploaderEmail);
             tvUploaderPhone = view.FindViewById<TextView>(Resource.Id.uploaderPhone);
+            ivCallNumber = view.FindViewById<ImageView>(Resource.Id.callNumber);
+            ivWriteEmail = view.FindViewById<ImageView>(Resource.Id.writeEmail);
+            btnCallNumber = view.FindViewById<Button>(Resource.Id.btnCallPhone);
+            btnWriteEmail = view.FindViewById<Button>(Resource.Id.btnWriteEmail);
 
             Bitmap bm = BitmapFactory.DecodeByteArray(mDog.Image, 0, mDog.Image.Length);
             photoPreview.SetImageBitmap(bm);
@@ -67,15 +72,62 @@ namespace FindogMobile.Fragments
             var users = GetUsersFromDb();
 
             var mobileUser = MobileUser.Instance().User;
+            User dogUser = new User();
             foreach (var user in users)
             {
                 if (user.Id.Equals(mDog.UserId))
                 {
+                    dogUser = user;
                     tvUploaderName.Text = user.Name;
                     tvUploaderEmail.Text = user.EmailAddress;
                     tvUploaderPhone.Text = user.PhoneNumber;
                 }
             }
+            btnCallNumber.Click += (s, e) => 
+            {
+                Intent phone = new Intent(Intent.ActionCall, Android.Net.Uri.Parse("tel:" + dogUser.PhoneNumber));
+                StartActivity(phone);
+            };
+
+            ivCallNumber.Click += (s, e) =>
+            {
+                Intent phone = new Intent(Intent.ActionCall, Android.Net.Uri.Parse("tel:" + dogUser.PhoneNumber));
+                StartActivity(phone);
+            };
+
+            btnWriteEmail.Click += (s, e) =>
+            {                
+                Intent i = new Intent(Intent.ActionSend);
+                i.SetType("message/rfc822");
+                i.PutExtra(Intent.ExtraEmail, new String[] { dogUser.EmailAddress });
+                i.PutExtra(Intent.ExtraSubject, "subject of email");
+                i.PutExtra(Intent.ExtraText, "body of email");
+                try
+                {
+                    StartActivity(Intent.CreateChooser(i, "Send mail"));
+                }
+                catch (Android.Content.ActivityNotFoundException ex)
+                {
+                    Toast.MakeText(this.Activity, "There are no email applications installed.", ToastLength.Short).Show();
+                }
+            };
+
+            ivWriteEmail.Click += (s, e) =>
+            {
+                Intent i = new Intent(Intent.ActionSend);
+                i.SetType("message/rfc822");
+                i.PutExtra(Intent.ExtraEmail, new String[] { dogUser.EmailAddress });
+                i.PutExtra(Intent.ExtraSubject, "subject of email");
+                i.PutExtra(Intent.ExtraText, "body of email");
+                try
+                {
+                    StartActivity(Intent.CreateChooser(i, "Send mail"));
+                }
+                catch (Android.Content.ActivityNotFoundException ex)
+                {
+                    Toast.MakeText(this.Activity, "There are no email applications installed.", ToastLength.Short).Show();
+                }
+            };
 
             return view;
         }

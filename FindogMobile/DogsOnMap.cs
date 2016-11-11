@@ -52,8 +52,28 @@ namespace FindogMobile
             googleMap.AnimateCamera(cameraUpdate);
             googleMap.MyLocationEnabled = true;
             googleMap.SetInfoWindowAdapter(this);
+            googleMap.InfoWindowClick += InfoWindowClick;
 
             map = googleMap;
+        }
+
+        private void InfoWindowClick(object sender, InfoWindowClickEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(e.Marker.Snippet))
+            {
+                var animal = Dogs.Where(d => d.AnimalIdToString().Equals(e.Marker.Snippet)).FirstOrDefault();
+                Intent intent = new Intent(this, typeof(DogDescription));
+                Bundle bundle = new Bundle();
+                bundle.PutString("userId", animal.UserId.ToString());
+                bundle.PutString("breed", animal.Breed);
+                bundle.PutDouble("latitude", animal.Latitude);
+                bundle.PutString("description", animal.Description);
+                bundle.PutByteArray("image", animal.Image);
+                bundle.PutDouble("longitude", animal.Longitude);
+                bundle.PutDouble("latitude", animal.Latitude);
+                intent.PutExtra("bundle", bundle);
+                StartActivity(intent);
+            }
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -153,6 +173,21 @@ namespace FindogMobile
 
             Bitmap bm = BitmapFactory.DecodeByteArray(animal.Image, 0, animal.Image.Length);
             image.SetImageBitmap(bm);
+
+            //btnMarker.Click += (s, e) =>
+            //{
+            //    Intent intent = new Intent(this, typeof(DogDescription));
+            //    Bundle bundle = new Bundle();
+            //    bundle.PutString("userId", animal.UserId.ToString());
+            //    bundle.PutString("breed", animal.Breed);
+            //    bundle.PutDouble("latitude", animal.Latitude);
+            //    bundle.PutString("description", animal.Description);
+            //    bundle.PutByteArray("image", animal.Image);
+            //    bundle.PutDouble("longitude", animal.Longitude);
+            //    bundle.PutDouble("latitude", animal.Latitude);
+            //    intent.PutExtra("bundle", bundle);
+            //    StartActivity(intent);
+            //};
 
             return view;
         }

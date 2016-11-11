@@ -4,76 +4,96 @@
     android:layout_height="fill_parent"
     android:background="#ffffff"
     android:fitsSystemWindows="true">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+    <ImageView
+        android:src="@drawable/Dog"
+        android:clickable="true"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/photoPreview" />
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
+      <TableRow>
         <ImageView
-            android:src="@drawable/Dog"
-            android:clickable="true"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal"
-            android:id="@+id/photoPreview" />
-        <TableLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/DogFootprint" />
+        <TextView
+            android:id="@+id/breedReadOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:stretchColumns="1">
-            <TableRow>
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/DogFootprint" />
-                <TextView
-                    android:id="@+id/breedReadOnly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp" />
-            </TableRow>
-            <TableRow>
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/Pen" />
-                <TextView
-                    android:id="@+id/descriptionReadOnly"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp" />
-            </TableRow>
-            <TableRow>
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/User" />
-                <TextView
-                    android:id="@+id/uploaderName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp" />
-            </TableRow>
-            <TableRow>
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/Phone" />
-                <TextView
-                    android:id="@+id/uploaderPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp" />
-            </TableRow>
-            <TableRow>
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/Email" />
-                <TextView
-                    android:id="@+id/uploaderEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp" />
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
+            android:textSize="18dp" />
+      </TableRow>
+      <TableRow>
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/Pen" />
+        <TextView
+            android:id="@+id/descriptionReadOnly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp" />
+      </TableRow>
+      <TableRow>
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/User" />
+        <TextView
+            android:id="@+id/uploaderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp" />
+      </TableRow>
+      <TableRow
+          android:layout_width="fill_parent">
+        <ImageView
+            android:id="@+id/callNumber"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:clickable="true"
+            android:src="@drawable/Phone" />
+        <TextView
+            android:id="@+id/uploaderPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp" />
+        <Button
+            android:layout_height="32dp"
+            android:layout_width="32dp"
+            android:layout_gravity="right"
+            android:id="@+id/btnCallPhone"
+            android:text=""
+            android:background="@drawable/Phone"
+                  />
+      </TableRow>
+      <TableRow>
+        <ImageView
+              android:id="@+id/writeEmail"
+              android:layout_width="32dp"
+              android:layout_height="32dp"
+              android:clickable="true"
+              android:src="@drawable/Email" />
+        <TextView
+            android:id="@+id/uploaderEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp" />
+        <Button
+            android:layout_height="32dp"
+            android:layout_width="32dp"
+            android:layout_gravity="right"
+            android:id="@+id/btnWriteEmail"
+            android:text=""
+            android:background="@drawable/Email"/>
+      </TableRow>
+    </TableLayout>
+  </LinearLayout>
 </ScrollView>
