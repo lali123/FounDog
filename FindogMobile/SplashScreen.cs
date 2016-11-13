@@ -19,7 +19,7 @@ using Newtonsoft.Json.Linq;
 
 namespace FindogMobile
 {
-    [Activity(Label = "FinDog", MainLauncher = true, Icon = "@drawable/Dog", Theme = "@style/Theme.AppCompat.Light.NoActionBar.Splash", NoHistory =true)]
+    [Activity(Label = "FinDog", MainLauncher = true, Icon = "@drawable/Dog", Theme = "@style/Theme.AppCompat.Light.NoActionBar.Splash", NoHistory = true)]
     public class SplashScreen : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -33,11 +33,13 @@ namespace FindogMobile
         {
             base.OnResume();
 
-            Task startupWork = new Task(() => {
+            Task startupWork = new Task(() =>
+            {
                 App.IsUserAlreadyRegistered = UserAlreadyRegistered();
             });
 
-            startupWork.ContinueWith(t => {
+            startupWork.ContinueWith(t =>
+            {
                 StartActivity(new Intent(Application.Context, typeof(Login)));
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
@@ -57,7 +59,8 @@ namespace FindogMobile
                     EmailAddress = prefs.GetString("Email", ""),
                     Name = prefs.GetString("Name", ""),
                     PhoneNumber = prefs.GetString("Phone", ""),
-                    Id = prefs.GetString("Id", "")
+                    Id = prefs.GetString("Id", ""),
+                    Password = prefs.GetString("Password", "")
                 };
                 MobileUser.Instance().User = user;
 
@@ -69,7 +72,7 @@ namespace FindogMobile
                         return true;
                     }
                 }
-                
+
             }
             catch (Exception)
             {
@@ -118,6 +121,7 @@ namespace FindogMobile
                         EmailAddress = u["emailAddress"].ToString(),
                         Name = u["name"].ToString(),
                         PhoneNumber = u["phoneNumber"].ToString(),
+                        Id = u["id"].ToString(),
                     };
 
                     users.Add(user);

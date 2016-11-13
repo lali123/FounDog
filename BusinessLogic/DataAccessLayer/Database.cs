@@ -79,6 +79,7 @@ namespace BusinessLogic.DataAccessLayer
             return WantedAnimalCollection.AsQueryable().Where(func).ToList();
         }
 
+
         public void AddUsers(User user)
         {
             UserCollection.InsertOne(user);
@@ -92,6 +93,20 @@ namespace BusinessLogic.DataAccessLayer
         public void AddFoundAnimal(Animal animal)
         {
             FoundAnimalCollection.InsertOne(animal);
+        }
+
+
+        public bool UpdateUser(User user)
+        {
+            var filter = Builders<User>.Filter.Eq("Id", user.Id);
+            var update = Builders<User>.Update.Set("Name", user.Name)
+                .Set("PhoneNumber", user.PhoneNumber)
+                .Set("Date", user.Date)
+                .Set("EmailAddress", user.EmailAddress)
+                .Set("Password", user.Password);
+            var updateResult = UserCollection.UpdateOne(filter, update);
+
+            return updateResult.IsAcknowledged;
         }
 
         public bool UpdateAnimal(Animal animal)
@@ -122,6 +137,12 @@ namespace BusinessLogic.DataAccessLayer
             return updateResult.IsAcknowledged;
         }
 
+
+        public bool DeleteUser(string id)
+        {
+            var deleteResult = UserCollection.DeleteOne(a => a.Id == id);
+            return deleteResult.IsAcknowledged;
+        }
 
         public bool DeleteFoundAnimal(String id)
         {

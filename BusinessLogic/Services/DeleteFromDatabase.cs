@@ -18,5 +18,10 @@ namespace BusinessLogic.Services
         {
             return Database.Instance.DeleteWantedAnimal(id);
         }
+
+        public static bool DeleteUser(string id)
+        {
+            return Database.Instance.DeleteUser(id);
+        }
     }
 }

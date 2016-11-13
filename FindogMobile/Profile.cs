@@ -49,6 +49,10 @@ namespace FindogMobile
                         Intent intentLost = new Intent(this, typeof(MyLostDog));
                         StartActivity(intentLost);
                         break;
+                    case "Profile settings":
+                        Intent intentUpdateProfile = new Intent(this, typeof(UpdateProfile));
+                        StartActivity(intentUpdateProfile);
+                        break;
                     default:
                         break;
                 }
@@ -64,6 +68,7 @@ namespace FindogMobile
                 new DogMenu { IsGroupHeader = false, Title=MobileUser.Instance().User.EmailAddress, Icon=Resource.Drawable.Email},
                 new DogMenu { IsGroupHeader = false, Title="Found dogs by me", Icon=Resource.Drawable.DogHouse},
                 new DogMenu { IsGroupHeader = false, Title="Lost dogs by me", Icon=Resource.Drawable.DogLeash},
+                new DogMenu { IsGroupHeader = false, Title="Profile settings", Icon=Resource.Drawable.Settings},
             };
         }
 

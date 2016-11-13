@@ -2046,8 +2046,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f02007f
 			public const int MapMarker = 2130837631;
 			
-			// aapt resource value: 0x7f020087
-			public const int notification_template_icon_bg = 2130837639;
+			// aapt resource value: 0x7f020088
+			public const int notification_template_icon_bg = 2130837640;
 			
 			// aapt resource value: 0x7f020080
 			public const int Pen = 2130837632;
@@ -2062,13 +2062,16 @@ namespace FindogMobile
 			public const int Search = 2130837635;
 			
 			// aapt resource value: 0x7f020084
-			public const int SplashScreen = 2130837636;
+			public const int Settings = 2130837636;
 			
 			// aapt resource value: 0x7f020085
-			public const int SplashScreen2 = 2130837637;
+			public const int SplashScreen = 2130837637;
 			
 			// aapt resource value: 0x7f020086
-			public const int User = 2130837638;
+			public const int SplashScreen2 = 2130837638;
+			
+			// aapt resource value: 0x7f020087
+			public const int User = 2130837639;
 			
 			static Drawable()
 			{
@@ -2116,8 +2119,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090081
 			public const int Text2 = 2131296385;
 			
-			// aapt resource value: 0x7f0900c9
-			public const int WantedDogsList = 2131296457;
+			// aapt resource value: 0x7f0900cf
+			public const int WantedDogsList = 2131296463;
 			
 			// aapt resource value: 0x7f0900b7
 			public const int action0 = 2131296439;
@@ -2194,6 +2197,9 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090092
 			public const int btnCallPhone = 2131296402;
 			
+			// aapt resource value: 0x7f0900cd
+			public const int btnDeleteProfile = 2131296461;
+			
 			// aapt resource value: 0x7f0900a1
 			public const int btnGPS = 2131296417;
 			
@@ -2205,6 +2211,9 @@ namespace FindogMobile
 			
 			// aapt resource value: 0x7f0900c7
 			public const int btnUpdateDog = 2131296455;
+			
+			// aapt resource value: 0x7f0900cc
+			public const int btnUpdateProfile = 2131296460;
 			
 			// aapt resource value: 0x7f090095
 			public const int btnWriteEmail = 2131296405;
@@ -2287,8 +2296,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f09009d
 			public const int dogtoolbar = 2131296413;
 			
-			// aapt resource value: 0x7f0900c8
-			public const int dogwantedtoolbar = 2131296456;
+			// aapt resource value: 0x7f0900ce
+			public const int dogwantedtoolbar = 2131296462;
 			
 			// aapt resource value: 0x7f090067
 			public const int edit_query = 2131296359;
@@ -2316,6 +2325,18 @@ namespace FindogMobile
 			
 			// aapt resource value: 0x7f09009b
 			public const int etDescriptionUpdate = 2131296411;
+			
+			// aapt resource value: 0x7f0900ca
+			public const int etEmailUpdate = 2131296458;
+			
+			// aapt resource value: 0x7f0900c8
+			public const int etNameUpdate = 2131296456;
+			
+			// aapt resource value: 0x7f0900cb
+			public const int etPasswodUpdate = 2131296459;
+			
+			// aapt resource value: 0x7f0900c9
+			public const int etPhoneNumberUpdate = 2131296457;
 			
 			// aapt resource value: 0x7f090030
 			public const int exitUntilCollapsed = 2131296304;
@@ -2500,8 +2521,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f09005f
 			public const int radio = 2131296351;
 			
-			// aapt resource value: 0x7f0900cb
-			public const int removeItem = 2131296459;
+			// aapt resource value: 0x7f0900d1
+			public const int removeItem = 2131296465;
 			
 			// aapt resource value: 0x7f09003b
 			public const int right = 2131296315;
@@ -2533,8 +2554,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f090044
 			public const int scrollable = 2131296324;
 			
-			// aapt resource value: 0x7f0900ca
-			public const int search = 2131296458;
+			// aapt resource value: 0x7f0900d0
+			public const int search = 2131296464;
 			
 			// aapt resource value: 0x7f090069
 			public const int search_badge = 2131296361;
@@ -2965,7 +2986,10 @@ namespace FindogMobile
 			public const int UpdateDog = 2130903113;
 			
 			// aapt resource value: 0x7f03004a
-			public const int WantedDogs = 2130903114;
+			public const int UpdateProfile = 2130903114;
+			
+			// aapt resource value: 0x7f03004b
+			public const int WantedDogs = 2130903115;
 			
 			static Layout()
 			{

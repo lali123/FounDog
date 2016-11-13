@@ -19,5 +19,10 @@ namespace BusinessLogic.Services
         {
             return Database.Instance.UpdateWantedAnimal(animal);
         }
+
+        public static bool UpdateUser(User user)
+        {
+            return Database.Instance.UpdateUser(user);
+        }
     }
 }

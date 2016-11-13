@@ -72,13 +72,15 @@ namespace FindogMobile
                     EmailAddress = prefs.GetString("Email", ""),
                     Name = prefs.GetString("Name", ""),
                     PhoneNumber = prefs.GetString("Phone", ""),
-                    Id = prefs.GetString("Id", "")
+                    Id = prefs.GetString("Id", ""),
+                    Password = prefs.GetString("Password", ""),
                 };
-                password = prefs.GetString("Password", "");
                 txtName.Text = user.Name;
                 txtEmail.Text = user.EmailAddress;
                 txtPhoneNumber.Text = user.PhoneNumber;
-                txtPassword.Text = password;
+                txtPassword.Text = user.Password;
+
+                MobileUser.Instance().User = user;
             }
         }
 
@@ -113,6 +115,7 @@ namespace FindogMobile
                     EmailAddress = txtEmail.Text,
                     Name = txtName.Text,
                     PhoneNumber = txtPhoneNumber.Text,
+                    Password = txtPassword.Text
                 };
 
 
@@ -125,6 +128,17 @@ namespace FindogMobile
                 editor.Apply();
 
                 SaveUserToDb(user);
+
+                user = new User()
+                {
+                    // Date = prefs.GetString("Date", DateTime.Now.ToString()),
+                    EmailAddress = prefs.GetString("Email", ""),
+                    Name = prefs.GetString("Name", ""),
+                    PhoneNumber = prefs.GetString("Phone", ""),
+                    Id = prefs.GetString("Id", ""),
+                    Password = prefs.GetString("Password", ""),
+                };
+                MobileUser.Instance().User = user;
             }
 
             Toast.MakeText(this, "Registered", ToastLength.Short).Show();
@@ -155,7 +169,7 @@ namespace FindogMobile
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 Toast.MakeText(this, "Cannot connect to the server", ToastLength.Short).Show();
             }
@@ -171,6 +185,18 @@ namespace FindogMobile
             {
                 if (user.Name.Equals(txtName.Text) && password.Equals(txtPassword.Text))
                 {
+                    ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
+                    user = new User()
+                    {
+                        // Date = prefs.GetString("Date", DateTime.Now.ToString()),
+                        EmailAddress = prefs.GetString("Email", ""),
+                        Name = prefs.GetString("Name", ""),
+                        PhoneNumber = prefs.GetString("Phone", ""),
+                        Id = prefs.GetString("Id", ""),
+                        Password = prefs.GetString("Password", ""),
+                    };
+                    MobileUser.Instance().User = user;
+
                     Toast.MakeText(this, "Login", ToastLength.Short).Show();
                     Intent intentMain = new Intent(this, typeof(MainActivity));
                     StartActivity(intentMain);
