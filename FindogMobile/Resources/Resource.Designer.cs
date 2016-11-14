@@ -83,6 +83,22 @@ namespace FindogMobile
 			}
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f0c0000
+			public const int menu = 2131492864;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -2410,6 +2426,9 @@ namespace FindogMobile
 			// aapt resource value: 0x7f0900a7
 			public const int input_phone = 2131296423;
 			
+			// aapt resource value: 0x7f0900d1
+			public const int itemRemove = 2131296465;
+			
 			// aapt resource value: 0x7f090000
 			public const int item_touch_helper_previous_elevation = 2131296256;
 			
@@ -2520,9 +2539,6 @@ namespace FindogMobile
 			
 			// aapt resource value: 0x7f09005f
 			public const int radio = 2131296351;
-			
-			// aapt resource value: 0x7f0900d1
-			public const int removeItem = 2131296465;
 			
 			// aapt resource value: 0x7f09003b
 			public const int right = 2131296315;
@@ -3004,11 +3020,11 @@ namespace FindogMobile
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f0c0000
-			public const int ItemSearch = 2131492864;
+			// aapt resource value: 0x7f0d0000
+			public const int ItemSearch = 2131558400;
 			
-			// aapt resource value: 0x7f0c0001
-			public const int PopupMenu = 2131492865;
+			// aapt resource value: 0x7f0d0001
+			public const int PopupMenu = 2131558401;
 			
 			static Menu()
 			{

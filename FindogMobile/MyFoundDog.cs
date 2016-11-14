@@ -24,6 +24,7 @@ namespace FindogMobile
         ListView uploadList;
         List<Animal> result;
         public Animal SelectedAnimal { get; set; }
+        DogAdapter adapter;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,9 +34,10 @@ namespace FindogMobile
 
             result = FetchAnimalsAsync();
 
-            var adapter = new DogAdapter(this, result);
+            adapter = new DogAdapter(this, result);
             uploadList = FindViewById<ListView>(Resource.Id.MyFoundList);
             uploadList.Adapter = adapter;
+            RegisterForContextMenu(uploadList);
             uploadList.ItemClick += (s, e) =>
             {
                 var listView = s as ListView;
@@ -57,25 +59,43 @@ namespace FindogMobile
                 intent.PutExtra("bundle", bundle);
                 StartActivity(intent);
             };
-
-            uploadList.ItemLongClick += (s, e) =>
-            {
-                var listView = s as ListView;
-                var animal = result[e.Position];
-                PopupMenu menu = new PopupMenu(this, uploadList);
-                menu.Inflate(Resource.Menu.PopupMenu);
-                menu.MenuItemClick += (se, ev) =>
-                {
-                    RemoveAnimal(animal.AnimalIdToString());
-                    result.Remove(animal);
-
-                    adapter.NotifyDataSetChanged();
-                    Toast.MakeText(this, "Deleted", ToastLength.Short).Show();
-                };
-                menu.Show();
-            };
         }
 
+        public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+        {
+            if (v.Id == Resource.Id.MyFoundList)
+            {
+                var menuItems = Resources.GetStringArray(Resource.Array.menu);
+                for (var i = 0; i < menuItems.Length; i++)
+                    menu.Add(Menu.None, i, i, menuItems[i]);
+            }
+        }
+
+        public override bool OnContextItemSelected(IMenuItem item)
+        {
+            var info = (AdapterView.AdapterContextMenuInfo)item.MenuInfo;
+            var menuItemIndex = item.ItemId;
+            var menuItems = Resources.GetStringArray(Resource.Array.menu);
+            var menuItemName = menuItems[menuItemIndex];
+            var animal = result[info.Position];
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.SetTitle("One month");
+            alert.SetMessage("Are you sure you want to delete "+animal.Breed + " ?");
+            alert.SetPositiveButton("Cancel", (senderAlert, args) => {
+            });
+
+            alert.SetNegativeButton("Delete", (senderAlert, args) => {
+                RemoveAnimal(animal.AnimalIdToString());
+                result.Remove(animal);
+                adapter.NotifyDataSetChanged();
+                Toast.MakeText(this, string.Format("{0} deleted", animal.Breed), ToastLength.Short).Show();
+            });
+
+            Dialog dialog = alert.Create();
+            dialog.Show();
+           
+            return true;
+        }
 
         private void RemoveAnimal(string id)
         {

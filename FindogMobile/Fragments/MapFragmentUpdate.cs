@@ -105,10 +105,10 @@ namespace FindogMobile.Fragments
             markerOptions.SetPosition(new LatLng(e.Point.Latitude, e.Point.Longitude));
             markerOptions.SetTitle("Found dog");
             map.AddMarker(markerOptions);
-            if (Activity is FindDog)
+            if (Activity is UpdateFindog)
             {
-                (Activity as FindDog).Longitude = e.Point.Longitude;
-                (Activity as FindDog).Latitude = e.Point.Latitude;
+                (Activity as UpdateFindog).Longitude = e.Point.Longitude;
+                (Activity as UpdateFindog).Latitude = e.Point.Latitude;
             }
         }
     }

@@ -183,19 +183,20 @@ namespace FindogMobile
                 && !string.IsNullOrEmpty(txtPhoneNumber.Text) 
                 && !string.IsNullOrEmpty(txtPassword.Text))
             {
-                if (user.Name.Equals(txtName.Text) && password.Equals(txtPassword.Text))
+                ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
+                user = new User()
                 {
-                    ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
-                    user = new User()
-                    {
-                        // Date = prefs.GetString("Date", DateTime.Now.ToString()),
-                        EmailAddress = prefs.GetString("Email", ""),
-                        Name = prefs.GetString("Name", ""),
-                        PhoneNumber = prefs.GetString("Phone", ""),
-                        Id = prefs.GetString("Id", ""),
-                        Password = prefs.GetString("Password", ""),
-                    };
-                    MobileUser.Instance().User = user;
+                    // Date = prefs.GetString("Date", DateTime.Now.ToString()),
+                    EmailAddress = prefs.GetString("Email", ""),
+                    Name = prefs.GetString("Name", ""),
+                    PhoneNumber = prefs.GetString("Phone", ""),
+                    Id = prefs.GetString("Id", ""),
+                    Password = prefs.GetString("Password", ""),
+                };
+                MobileUser.Instance().User = user;
+                if (user.Name.Equals(txtName.Text) && user.Password.Equals(txtPassword.Text))
+                {
+                   
 
                     Toast.MakeText(this, "Login", ToastLength.Short).Show();
                     Intent intentMain = new Intent(this, typeof(MainActivity));

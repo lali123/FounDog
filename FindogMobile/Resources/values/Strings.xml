@@ -14,5 +14,7 @@
   <string name="Save">Save</string>
   <string name="Update">Update</string>
   <string name="Breed">Breed</string>
-
+  <string-array name="menu">
+    <item>Delete</item>
+  </string-array>
 </resources>
