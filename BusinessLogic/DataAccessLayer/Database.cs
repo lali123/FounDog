@@ -101,7 +101,7 @@ namespace BusinessLogic.DataAccessLayer
             var filter = Builders<User>.Filter.Eq("Id", user.Id);
             var update = Builders<User>.Update.Set("Name", user.Name)
                 .Set("PhoneNumber", user.PhoneNumber)
-                .Set("Date", user.Date)
+                .Set("Date", DateTime.Now)
                 .Set("EmailAddress", user.EmailAddress)
                 .Set("Password", user.Password);
             var updateResult = UserCollection.UpdateOne(filter, update);
@@ -114,7 +114,7 @@ namespace BusinessLogic.DataAccessLayer
             var filter = Builders<Animal>.Filter.Eq("AnimalId", animal.AnimalId);
             var update = Builders<Animal>.Update.Set("Breed", animal.Breed)
                 .Set("Description", animal.Description)
-                .Set("Date", animal.Date)
+                .Set("Date", DateTime.Now)
                 .Set("Latitude", animal.Latitude)
                 .Set("Longitude", animal.Longitude)
                 .Set("Image", animal.Image);
@@ -128,7 +128,7 @@ namespace BusinessLogic.DataAccessLayer
             var filter = Builders<Animal>.Filter.Eq("AnimalId", animal.AnimalId);
             var update = Builders<Animal>.Update.Set("Breed", animal.Breed)
                 .Set("Description", animal.Description)
-                .Set("Date", animal.Date)
+                .Set("Date", DateTime.Now)
                 .Set("Latitude", animal.Latitude)
                 .Set("Longitude", animal.Longitude)
                 .Set("Image", animal.Image);

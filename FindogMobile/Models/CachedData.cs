@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,31 +9,32 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using BusinessLogic.Models;
 
 namespace FindogMobile.Models
 {
-    class WebApiConnection
+    public class CachedData
     {
-        public string ConnectionString { get; set; }
+        public List<Animal> FoundAnimals { get; set; }
+        public List<Animal> WantedAnimals { get; set; }
+        public List<User> Users { get; set; }
 
         #region Singleton
 
-        private static WebApiConnection _instance = new WebApiConnection();
+        private static CachedData _instance = new CachedData();
 
         //Constructor is marked as private   
         //so that the instance cannot be created   
         //from outside of the class  
-        private WebApiConnection()
+        private CachedData()
         {
-            //ConnectionString = @"http://172.22.9.214:8086/";
-           // ConnectionString = @"http://193.6.168.42:8086/";
-            ConnectionString = @"http://192.168.1.101:8086/";
-            //ConnectionString = @"http://192.168.1.64:8086/";
-            //ConnectionString = @"http://192.168.1.7:8086/";
+            FoundAnimals = new List<Animal>();
+            WantedAnimals = new List<Animal>();
+            Users = new List<User>();
         }
 
         //Static method which allows the instance creation  
-        static internal WebApiConnection Instance()
+        static internal CachedData Instance()
         {
             //All you need to do it is just return the  
             //already initialized which is thread safe  

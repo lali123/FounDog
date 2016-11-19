@@ -77,8 +77,7 @@ namespace FindogWeb.Controllers
             }
 
         }
-
-
+        
         // GET: Animal
         [Route("deleteuser/{id}")]
         [HttpGet]

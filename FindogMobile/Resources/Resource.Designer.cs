@@ -2062,8 +2062,8 @@ namespace FindogMobile
 			// aapt resource value: 0x7f02007f
 			public const int MapMarker = 2130837631;
 			
-			// aapt resource value: 0x7f020088
-			public const int notification_template_icon_bg = 2130837640;
+			// aapt resource value: 0x7f02008a
+			public const int notification_template_icon_bg = 2130837642;
 			
 			// aapt resource value: 0x7f020080
 			public const int Pen = 2130837632;
@@ -2088,6 +2088,12 @@ namespace FindogMobile
 			
 			// aapt resource value: 0x7f020087
 			public const int User = 2130837639;
+			
+			// aapt resource value: 0x7f020088
+			public const int WhiteDog = 2130837640;
+			
+			// aapt resource value: 0x7f020089
+			public const int WhiteDog2 = 2130837641;
 			
 			static Drawable()
 			{

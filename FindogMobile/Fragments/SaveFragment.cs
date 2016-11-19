@@ -13,11 +13,17 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 
+using NotificationCompat = Android.Support.V4.App.NotificationCompat;
+using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
+
 namespace FindogMobile.Fragments
 {
     public class SaveFragment : Fragment
     {
         Button saveDog;
+
+        // Unique ID for our notification: 
+        private static readonly int ButtonClickNotificationId = 1000;
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -100,6 +106,20 @@ namespace FindogMobile.Fragments
             {
                 Toast.MakeText(this.Activity, "Cannot connect to the server", ToastLength.Short).Show();
             }
+
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this.Activity)
+            .SetAutoCancel(true)                        // Dismiss from the notif. area when clicked
+            //.SetContentIntent(resultPendingIntent)    // Start 2nd activity when the intent is clicked.
+            .SetContentTitle("Dog saved")               // Set its title
+            .SetSmallIcon(Resource.Drawable.WhiteDog2)        // Display this icon
+            .SetLargeIcon(BitmapFactory.DecodeResource(Activity.Resources, Resource.Drawable.Dog))
+            .SetContentText(String.Format(
+            "{0} dog saved to database.", animal.Breed));
+
+            NotificationManager notificationManager =
+            (NotificationManager)Activity.GetSystemService(Activity.NotificationService);
+            notificationManager.Notify(ButtonClickNotificationId, builder.Build());
 
         }
     }

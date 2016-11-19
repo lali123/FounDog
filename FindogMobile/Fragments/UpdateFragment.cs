@@ -76,7 +76,7 @@ namespace FindogMobile.Fragments
             }
             else if (App.Tag.Equals("lost"))
             {
-                postString = "animal/wantedanimals/" + animal.AnimalIdToString();
+                postString = "animal/updatewantedanimal/" + animal.AnimalIdToString();
             }
 
             try

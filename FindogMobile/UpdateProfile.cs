@@ -163,6 +163,7 @@ namespace FindogMobile
                 editor.PutString("Email", MobileUser.Instance().User.EmailAddress);
                 editor.PutString("Phone", MobileUser.Instance().User.PhoneNumber);
                 editor.PutString("Password", MobileUser.Instance().User.Password);
+                editor.Apply();
             }
             catch (Exception)
             {

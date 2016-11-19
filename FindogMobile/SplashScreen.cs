@@ -16,6 +16,7 @@ using FindogMobile.Models;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using FindogMobile.Services;
 
 namespace FindogMobile
 {
@@ -36,6 +37,7 @@ namespace FindogMobile
             Task startupWork = new Task(() =>
             {
                 App.IsUserAlreadyRegistered = UserAlreadyRegistered();
+                StartService(new Intent(this, typeof(DogService)));
             });
 
             startupWork.ContinueWith(t =>
@@ -45,7 +47,6 @@ namespace FindogMobile
 
             startupWork.Start();
         }
-
 
         private bool UserAlreadyRegistered()
         {
@@ -60,15 +61,19 @@ namespace FindogMobile
                     Name = prefs.GetString("Name", ""),
                     PhoneNumber = prefs.GetString("Phone", ""),
                     Id = prefs.GetString("Id", ""),
-                    Password = prefs.GetString("Password", "")
+                    Password = prefs.GetString("Password", ""),
                 };
                 MobileUser.Instance().User = user;
 
-                List<User> users = GetUsersFromDb();
-                foreach (var u in users)
+                CachedData.Instance().Users = GetUsersFromDb();
+                CachedData.Instance().FoundAnimals = GetFoundAnimalsFromDb();
+                CachedData.Instance().WantedAnimals = GetWantedAnimalsFromDb();
+
+                foreach (var u in CachedData.Instance().Users)
                 {
                     if (u.Name.Equals(user.Name) && u.PhoneNumber.Equals(user.PhoneNumber))
                     {
+                        MobileUser.Instance().User = u;
                         return true;
                     }
                 }
@@ -84,7 +89,6 @@ namespace FindogMobile
 
             return false;
         }
-
 
         private List<User> GetUsersFromDb()
         {
@@ -122,6 +126,7 @@ namespace FindogMobile
                         Name = u["name"].ToString(),
                         PhoneNumber = u["phoneNumber"].ToString(),
                         Id = u["id"].ToString(),
+                        Password = u["password"].ToString(),
                     };
 
                     users.Add(user);
@@ -135,5 +140,101 @@ namespace FindogMobile
             return users;
         }
 
+        private List<Animal> GetWantedAnimalsFromDb()
+        {
+            List<Animal> dogs = new List<Animal>();
+            try
+            {
+                string responseFromServer = String.Empty;
+                // Create a request for the URL. 		
+                WebRequest request = WebRequest.Create(WebApiConnection.Instance().ConnectionString + @"animal/wantedanimals");
+                // If required by the server, set the credentials.
+                request.Credentials = CredentialCache.DefaultCredentials;
+                // Get the response.
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    // Get the stream containing content returned by the server.
+                    using (System.IO.Stream dataStream = response.GetResponseStream())
+                    {
+                        // Read the content.
+                        using (StreamReader reader = new StreamReader(dataStream))
+                        {
+                            responseFromServer = reader.ReadToEnd();
+                        }
+                    }
+                }
+
+                JArray animals = JArray.Parse(responseFromServer);
+
+                foreach (var animal in animals)
+                {
+                    Animal dog = new Animal();
+                    dog.AnimalIdToObjectId(animal["animalId"].ToString());
+                    dog.UserId = animal["userId"].ToString();
+                    dog.Breed = animal["breed"].ToString();
+                    dog.Description = animal["description"].ToString();
+                    dog.Date = animal["date"].ToObject<DateTime>();
+                    dog.Image = animal["image"].ToObject<byte[]>();
+                    dog.Latitude = animal["latitude"].ToObject<double>();
+                    dog.Longitude = animal["longitude"].ToObject<double>();
+                    dogs.Add(dog);
+                }
+            }
+            catch (Exception)
+            {
+                Toast.MakeText(this, "Cannot connect to the server", ToastLength.Short).Show();
+            }
+
+
+            return dogs;
+        }
+
+        private List<Animal> GetFoundAnimalsFromDb()
+        {
+            List<Animal> dogs = new List<Animal>();
+            try
+            {
+                string responseFromServer = String.Empty;
+                // Create a request for the URL. 		
+                WebRequest request = WebRequest.Create(WebApiConnection.Instance().ConnectionString + @"animal/foundanimals");
+                // If required by the server, set the credentials.
+                request.Credentials = CredentialCache.DefaultCredentials;
+                // Get the response.
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    // Get the stream containing content returned by the server.
+                    using (Stream dataStream = response.GetResponseStream())
+                    {
+                        // Read the content.
+                        using (StreamReader reader = new StreamReader(dataStream))
+                        {
+                            responseFromServer = reader.ReadToEnd();
+                        }
+                    }
+                }
+
+                JArray animals = JArray.Parse(responseFromServer);
+
+                foreach (var animal in animals)
+                {
+                    Animal dog = new Animal();
+                    dog.UserId = animal["userId"].ToString();
+                    dog.Breed = animal["breed"].ToString();
+                    dog.Description = animal["description"].ToString();
+                    dog.Date = animal["date"].ToObject<DateTime>();
+                    dog.Image = animal["image"].ToObject<byte[]>();
+                    dog.Latitude = animal["latitude"].ToObject<double>();
+                    dog.Longitude = animal["longitude"].ToObject<double>();
+                    dogs.Add(dog);
+                }
+            }
+            catch (Exception)
+            {
+                Toast.MakeText(this, "Cannot connect to the server", ToastLength.Short).Show();
+            }
+
+
+            return dogs;
+        }
     }
 }

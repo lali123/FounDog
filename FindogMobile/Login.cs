@@ -22,7 +22,7 @@ using FindogMobile.Models;
 
 namespace FindogMobile
 {
-    [Activity(Label = "Login",  Icon = "@drawable/Dog")]
+    [Activity(Label = "Login", Icon = "@drawable/Dog")]
     public class Login : Activity
     {
         EditText txtName;
@@ -123,7 +123,7 @@ namespace FindogMobile
                 editor.PutString("Name", txtName.Text);
                 editor.PutString("Email", txtEmail.Text);
                 editor.PutString("Password", txtPassword.Text);
-                editor.PutString("Phone", txtPhoneNumber.Text);                
+                editor.PutString("Phone", txtPhoneNumber.Text);
 
                 editor.Apply();
 
@@ -178,37 +178,88 @@ namespace FindogMobile
 
         private void LoginClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtName.Text) 
+            user = new User()
+            {
+                Date = DateTime.Now,
+                EmailAddress = txtEmail.Text,
+                Name = txtName.Text,
+                PhoneNumber = txtPhoneNumber.Text,
+                Password = txtPassword.Text
+            };
+
+            if (!string.IsNullOrEmpty(txtName.Text)
                 && !string.IsNullOrEmpty(txtEmail.Text)
-                && !string.IsNullOrEmpty(txtPhoneNumber.Text) 
+                && !string.IsNullOrEmpty(txtPhoneNumber.Text)
                 && !string.IsNullOrEmpty(txtPassword.Text))
             {
-                ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
-                user = new User()
+                if (CachedData.Instance().Users.Count > 0)
                 {
-                    // Date = prefs.GetString("Date", DateTime.Now.ToString()),
-                    EmailAddress = prefs.GetString("Email", ""),
-                    Name = prefs.GetString("Name", ""),
-                    PhoneNumber = prefs.GetString("Phone", ""),
-                    Id = prefs.GetString("Id", ""),
-                    Password = prefs.GetString("Password", ""),
-                };
-                MobileUser.Instance().User = user;
-                if (user.Name.Equals(txtName.Text) && user.Password.Equals(txtPassword.Text))
-                {
-                   
+                    List<User> lista = CachedData.Instance().Users;
+                    if (lista.Where(u=>u.Name == user.Name && u.Password == user.Password && u.PhoneNumber == user.PhoneNumber && u.EmailAddress == user.EmailAddress).ToList().Count > 0)
+                    {
+                        MobileUser.Instance().User = CachedData.Instance().Users.Where(u => u.Name == user.Name && u.Password == user.Password && u.PhoneNumber == user.PhoneNumber && u.EmailAddress == user.EmailAddress).FirstOrDefault();
 
-                    Toast.MakeText(this, "Login", ToastLength.Short).Show();
-                    Intent intentMain = new Intent(this, typeof(MainActivity));
-                    StartActivity(intentMain);
+                        ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
+                        ISharedPreferencesEditor editor = prefs.Edit();
+                        editor.PutString("Id", MobileUser.Instance().User.Id);
+                        editor.PutString("Name", txtName.Text);
+                        editor.PutString("Email", txtEmail.Text);
+                        editor.PutString("Password", txtPassword.Text);
+                        editor.PutString("Phone", txtPhoneNumber.Text);
+
+                        editor.Apply();
+
+                        Toast.MakeText(this, "Login", ToastLength.Short).Show();
+                        Intent intentMain = new Intent(this, typeof(MainActivity));
+                        StartActivity(intentMain);
+
+                        
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, "Name or password not matched", ToastLength.Short).Show();
+                    }
                 }
                 else
                 {
-                    Toast.MakeText(this, "Name or password not matched", ToastLength.Short).Show();
+                    ISharedPreferences prefs = PreferenceManager.GetDefaultSharedPreferences(this);
+                    user = new User()
+                    {
+                        // Date = prefs.GetString("Date", DateTime.Now.ToString()),
+                        EmailAddress = prefs.GetString("Email", ""),
+                        Name = prefs.GetString("Name", ""),
+                        PhoneNumber = prefs.GetString("Phone", ""),
+                        Id = prefs.GetString("Id", ""),
+                        Password = prefs.GetString("Password", ""),
+                    };
+                    if (user.Name.Equals(txtName.Text) && user.Password.Equals(txtPassword.Text))
+                    {
+                        Toast.MakeText(this, "Login", ToastLength.Short).Show();
+                        Intent intentMain = new Intent(this, typeof(MainActivity));
+                        StartActivity(intentMain);
+                        
+                        MobileUser.Instance().User = user;
+
+                        ISharedPreferencesEditor editor = prefs.Edit();
+                        editor.PutString("Id", user.Id);
+                        editor.PutString("Name", txtName.Text);
+                        editor.PutString("Email", txtEmail.Text);
+                        editor.PutString("Password", txtPassword.Text);
+                        editor.PutString("Phone", txtPhoneNumber.Text);
+
+                        editor.Apply();
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, "Name or password not matched", ToastLength.Short).Show();
+                    }
+                    
                 }
             }
+            else
+            {
+                Toast.MakeText(this, "Some field is empty", ToastLength.Short).Show();
+            }
         }
-
-
     }
 }
